@@ -18,8 +18,10 @@ return static function (Slim\App $app): void {
     // ? Admin routes
     //* Base URI: localhost/book-shop/admin
     $app->group('/admin', function ($group) {
-        $group->get('/dashboard', [DashboardController::class, 'index']);
-        $group->get('/products', [DashboardController::class, 'products']);
+        $group->get('/dashboard', [DashboardController::class, 'index'])
+            ->setName('dashboard.index');
+        $group->get('/products', [DashboardController::class, 'products'])
+            ->setName('products.index');
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]

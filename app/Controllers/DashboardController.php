@@ -27,6 +27,7 @@ class DashboardController extends BaseController
     }
 
     public function products(Request $req, Response $res, array $args): Response {
+        // return $this->redirect($req, $res, 'products.index');
         return $this->render($res, 'admin/products/productsIndexView.php');
     }
 }
