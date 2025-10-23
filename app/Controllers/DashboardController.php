@@ -22,4 +22,8 @@ class DashboardController extends BaseController
 
         return $this->render($res, 'admin/dashboardView.php', $data);
     }
+
+    public function products(Request $req, Response $res, array $args): Response {
+        return $this->render($res, 'admin/products/productsIndexView.php');
+    }
 }
