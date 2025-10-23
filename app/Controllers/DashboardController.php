@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\SessionManager;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -19,6 +20,8 @@ class DashboardController extends BaseController
         //*change, pull data/records, etc.
         //* render view or redirect th $req to another view
         $data = [];
+        SessionManager::set('user_id', 321);
+        SessionManager::set('username', 'john');
 
         return $this->render($res, 'admin/dashboardView.php', $data);
     }
