@@ -6,6 +6,7 @@ declare(strict_types=1);
  * This file contains the routes for the web application.
  */
 
+use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ShopController;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -30,6 +31,8 @@ return static function (Slim\App $app): void {
 
     $app->get('/shops/{id}', [ShopController::class, 'getShop'])
         ->setName('shops.getShop');
+    $app->get('/dashboard', [DashboardController::class, 'index'])
+        ->setName('dashboard.index');
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {
