@@ -19,6 +19,12 @@ class ViewHelper
         require_once APP_VIEWS_PATH . '/common/header.php';
     }
 
+    public static function adminHeader(string $page_title): void
+    {
+        $page_title = $page_title ?? 'Default Title';
+        require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
+    }
+
     /**
      * Load the common JavaScript scripts for the page.
      *
@@ -37,6 +43,11 @@ class ViewHelper
     public static function loadFooter(): void
     {
         require_once APP_VIEWS_PATH . '/common/footer.php';
+    }
+
+        public static function adminFooter(): void
+    {
+        require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
     }
 
     /**

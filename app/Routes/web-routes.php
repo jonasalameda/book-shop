@@ -15,6 +15,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 return static function (Slim\App $app): void {
 
+    // ? Admin routes
+    //* Base URI: localhost/book-shop/admin
+    $app->group('/admin', function ($group) {
+        $group->get('/dashboard', [DashboardController::class, 'index']);
+    });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
     $app->get('/', [HomeController::class, 'index'])
@@ -31,8 +36,6 @@ return static function (Slim\App $app): void {
 
     $app->get('/shops/{id}', [ShopController::class, 'getShop'])
         ->setName('shops.getShop');
-    $app->get('/dashboard', [DashboardController::class, 'index'])
-        ->setName('dashboard.index');
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {

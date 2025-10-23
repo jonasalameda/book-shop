@@ -20,6 +20,6 @@ class DashboardController extends BaseController
         //* render view or redirect th $req to another view
         $data = [];
 
-        return $this->render($res, 'dashboardView.php', $data);
+        return $this->render($res, 'admin/dashboardView.php', $data);
     }
 }
