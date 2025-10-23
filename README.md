@@ -1,2 +1,2 @@
-# assignment-2
+# Book Shop
 assignment 2 for eCommerce
