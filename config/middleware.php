@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Middleware\ExceptionMiddleware;
+use App\Middleware\SessionMiddleware;
 use Slim\App;
 
 return function (App $app) {
@@ -17,4 +18,5 @@ return function (App $app) {
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
     $app->add(ExceptionMiddleware::class);
+    $app->add(SessionMiddleware::class);
 };
