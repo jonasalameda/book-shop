@@ -18,5 +18,6 @@ return function (App $app) {
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
     $app->add(ExceptionMiddleware::class);
+    // option 2
     $app->add(SessionMiddleware::class);
 };
