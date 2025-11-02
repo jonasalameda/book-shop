@@ -42,22 +42,21 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL, -- foreign
   `total_amount` decimal(10,2) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'Pending',
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `order_items`
 --
 
 CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL, -- foreign
+  `product_id` int(11) NOT NULL, -- foreign
   `quantity` int(11) NOT NULL,
   `unit_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -70,7 +69,7 @@ CREATE TABLE `order_items` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL, -- foreign
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
@@ -87,7 +86,7 @@ CREATE TABLE `products` (
 
 CREATE TABLE `product_images` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL, -- foreign
   `file_path` varchar(255) NOT NULL,
   `is_primary` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -127,11 +126,19 @@ ALTER TABLE `categories`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `orders`
+  FOREIGN KEY (user_id) REFERENCES users(id);
 --
 -- Indexes for table `order_items`
 --
+-- order_items order id product id
+
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `order_items`
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  FOREIGN KEY (product_id) REFERENCES products(id);
 
 --
 -- Indexes for table `products`
@@ -139,11 +146,17 @@ ALTER TABLE `order_items`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `products`
+  FOREIGN KEY (category_id) REFERENCES categories(id);
+
 --
 -- Indexes for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `product_images`
+  FOREIGN KEY (product_id) REFERENCES products(id);
 
 --
 -- Indexes for table `users`
