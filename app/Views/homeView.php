@@ -6,15 +6,22 @@ $page_title = 'Home';
 ViewHelper::loadHeader($page_title);
 ?>
 
-<h1>Slim Framework-based MVC Application</h1>
-<p>This is a simple MVC application built with Slim Framework.</p>
+<div class="container-fluid d-flex flex-column justify-content-center mb-3">
+    <div class="">
+        <h1>Test Title</h1>
+    </div>
 
-<p>This app uses a simple and effective way to pass the container to the controller given the small scope of the application and the fact that this application is to be used in a classroom setting where students are not yet familiar with the Dependency Inversion Principle.</p>
+    <div class="col">
+        <p>This is a simple MVC application built with Slim Framework.</p>
 
-<p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
-<p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
+        <p>This app uses a simple and effective way to pass the container to the controller given the small scope of the application and the fact that this application is to be used in a classroom setting where students are not yet familiar with the Dependency Inversion Principle.</p>
 
-<a href="./shops">Shops</a>
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
+    </div>
+</div>
+
+
 
 <?php
 
