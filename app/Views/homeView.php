@@ -6,22 +6,41 @@ $page_title = 'Home';
 ViewHelper::loadHeader($page_title);
 ?>
 
-<div class="container-fluid d-flex flex-column justify-content-center mb-3">
-    <div class="">
-        <h1>Test Title</h1>
+<div class="container-fluid text-center introduction">
+    <div class="row mt-3">
+        <div class="col">
+            <h1>Shop of Ruina</h1>
+        </div>
     </div>
 
-    <div class="col">
-        <p>This is a simple MVC application built with Slim Framework.</p>
+    <div class="row mt-6">
+        <div class="col">
+            <h2><i>"May you find your book in this place"</i></h2>
+        </div>
+    </div>
 
-        <p>This app uses a simple and effective way to pass the container to the controller given the small scope of the application and the fact that this application is to be used in a classroom setting where students are not yet familiar with the Dependency Inversion Principle.</p>
-
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
+    <div class="row mt-6">
+        <div class="col">
+            <h2>
+                Book, Librarian, Star and City
+            </h2>
+        </div>
+    </div>
+    <div class="row mt-6">
+        <div class="col">
+            <h2>
+                Welcome
+            </h2>
+        </div>
+    </div>
+    <div class="row mt-6">
+        <div class="col">
+            <h2>
+                To Shop of Ruina
+            </h2>
+        </div>
     </div>
 </div>
-
-
 
 <?php
 
