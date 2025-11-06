@@ -123,3 +123,7 @@ https://frostybee.github.io/web-dev/php/middleware/session/#step-3-register-the-
 # Standard Web Routes
 
 to associate a name with a route we call **setName()**.
+
+## CRUD using MVC
+
+https://frostybee.github.io/web-dev/php/slim-mvc/base-model/#execute---insert-update-delete-operations
