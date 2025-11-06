@@ -126,8 +126,8 @@ ALTER TABLE `categories`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `orders`
-  FOREIGN KEY (user_id) REFERENCES users(id);
+-- ALTER TABLE `orders`
+--   FOREIGN KEY (user_id) REFERENCES users(id);
 --
 -- Indexes for table `order_items`
 --
@@ -136,9 +136,9 @@ ALTER TABLE `orders`
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `order_items`
-  FOREIGN KEY (order_id) REFERENCES orders(id),
-  FOREIGN KEY (product_id) REFERENCES products(id);
+-- ALTER TABLE `order_items`
+--   FOREIGN KEY (order_id) REFERENCES orders(id),
+--   FOREIGN KEY (product_id) REFERENCES products(id);
 
 --
 -- Indexes for table `products`
@@ -146,8 +146,8 @@ ALTER TABLE `order_items`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `products`
-  FOREIGN KEY (category_id) REFERENCES categories(id);
+-- ALTER TABLE `products`
+--   FOREIGN KEY (category_id) REFERENCES categories(id);
 
 --
 -- Indexes for table `product_images`
@@ -155,8 +155,8 @@ ALTER TABLE `products`
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `product_images`
-  FOREIGN KEY (product_id) REFERENCES products(id);
+-- ALTER TABLE `product_images`
+--   FOREIGN KEY (product_id) REFERENCES products(id);
 
 --
 -- Indexes for table `users`
