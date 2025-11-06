@@ -9,6 +9,12 @@ define('APP_DEBUG_MODE', true);
 define('APP_ASSETS_DIR', '/public/assets');
 define('APP_BASE_URL', 'http://localhost/' . APP_ROOT_DIR_NAME);
 
+//* The base URI for the admin panel
+    define('APP_ADMIN_URL', APP_BASE_URL . '/admin');
+// echo APP_ADMIN_URL;
+// exit;
+
+
 define('APP_ASSETS_DIR_URL', APP_BASE_URL  . APP_ASSETS_DIR);
 define('APP_ASSETS_DIR_PATH', realpath(APP_BASE_DIR_PATH . '/' . APP_ASSETS_DIR));
 

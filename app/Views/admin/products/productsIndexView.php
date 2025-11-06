@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
 //TODO: set the page title dynamically based on the view being rendered in the controller.
 $page_title = 'Products list';
@@ -35,6 +36,7 @@ ViewHelper::adminHeader($page_title);
 
 <h1>Welcome to The Book shop Directory</h1>
 <br>
+<div><?= FlashMessage::render(); ?></div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -62,7 +64,7 @@ ViewHelper::adminHeader($page_title);
                     <td> <?= htmlspecialchars($product["created_at"]) ?> </td>
                     <td> <?= htmlspecialchars($product["updated_at"]) ?> </td>
                     <td>
-                        <a href="products/edit?id=<?= $product['id'] ?>" class="btn btn-success">Edit</a>
+                        <a href="products/edit/<?= $product['id'] ?>" class="btn btn-success">Edit</a>
                     </td>
                 </tr>
             <?php }

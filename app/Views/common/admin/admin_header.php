@@ -335,7 +335,7 @@
                                 <a
                                     class="nav-link d-flex align-items-center gap-2 active"
                                     aria-current="page"
-                                    href="/book-shop/admin/dashboard">
+                                    href="<?= APP_ADMIN_URL ?>/dashboard">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
@@ -343,7 +343,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/book-shop/admin/categories">
+                                <a class="nav-link d-flex align-items-center gap-2" href="<?= APP_ADMIN_URL ?>/categories">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#file-earmark"></use>
                                     </svg>
@@ -351,7 +351,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/book-shop/admin/products">
+                                <a class="nav-link d-flex align-items-center gap-2" href="<?= APP_ADMIN_URL ?>/products">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#cart"></use>
                                     </svg>
