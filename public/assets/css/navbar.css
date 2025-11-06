@@ -17,14 +17,6 @@ a.navbar-brand {
     background-color: #e6c092;
 }
 
-h1 {
-    font-family: "Arita buri", Courier, monospace;
-}
-
-p {
-    font-family: "IM Fell English";
-}
-
 @font-face {
     font-family: "Arita buri";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-buri-SemiBold.woff")
