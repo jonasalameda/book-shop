@@ -9,6 +9,7 @@ declare(strict_types=1);
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ShopController;
+use App\Controllers\ProductsController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -20,8 +21,10 @@ return static function (Slim\App $app): void {
     $app->group('/admin', function ($group) {
         $group->get('/dashboard', [DashboardController::class, 'index'])
             ->setName('dashboard.index');
-        $group->get('/products', [DashboardController::class, 'products'])
+        $group->get('/products', [ProductsController::class, 'index'])
             ->setName('products.index');
+        $group->get('/products/edit', [ProductsController::class, 'edit']);
+            //! Add Categories here
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
