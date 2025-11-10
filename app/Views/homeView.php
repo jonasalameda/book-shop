@@ -19,14 +19,7 @@ ViewHelper::loadHeader($page_title);
         </div>
     </div>
 
-    <div class="row mt-6">
-        <div class="col">
-            <h2>
-                Book, Librarian, Star and City
-            </h2>
-        </div>
-    </div>
-    <div class="row mt-6">
+    <!-- <div class="row mt-6">
         <div class="col">
             <h2>
                 Welcome
@@ -39,7 +32,7 @@ ViewHelper::loadHeader($page_title);
                 To Shop of Ruina
             </h2>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <?php

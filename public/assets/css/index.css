@@ -12,15 +12,18 @@ html {
 }
 
 .introduction {
+    top: 0;
+    left: 0;
     background: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0),
+            rgba(80, 75, 75, 0),
             rgba(0, 0, 0, 0.93)
         ),
         url("/book-shop/public/assets/imgs/home-background.gif");
     background-size: 100%;
     height: 100%;
-    padding: 12%;
+    width: 100%;
+    padding: 13%;
     color: rgb(255, 255, 255);
     background-repeat: no-repeat;
 }
@@ -30,7 +33,7 @@ h1 {
 }
 
 h2 {
-    font-family: "NanumSquare", Courier, monospace;
+    font-family: "IM Fell English", Courier, monospace;
     color: rgba(255, 255, 255, 0.877);
 }
 

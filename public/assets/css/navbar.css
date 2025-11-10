@@ -7,6 +7,7 @@ a.navbar-brand {
 
 .navbar {
     font-family: "NanumSquare", Courier, monospace;
+    position: sticky;
 }
 
 .navbar[data-bs-theme="dark"] {
