@@ -23,9 +23,10 @@ return static function (Slim\App $app): void {
             ->setName('dashboard.index');
         $group->get('/products', [ProductsController::class, 'index'])
             ->setName('products.index');
-            //* GET route for showing the product edit form
+        //* GET route for showing the product edit form
         $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']);
-            //! Add Categories here
+        $group->get('/products/create', [ProductsController::class, 'create']);
+        //! Add Categories here
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
     });
