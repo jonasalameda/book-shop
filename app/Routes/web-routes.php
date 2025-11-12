@@ -10,6 +10,7 @@ use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
+use App\Controllers\UploadController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -29,6 +30,10 @@ return static function (Slim\App $app): void {
         //! Add Categories here
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
+
+        // File upload routes
+        // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');
+        $group->post('/products/upload', [UploadController::class, 'upload'])->setName('upload.process');
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]

@@ -12,6 +12,9 @@ node_modules/
 *.code-workspace
 #.vscode
 
+# Image uploads
+public/uploads
+
 # Directories holding app-generated files.
 # Keep the logs/ directory
 !var/logs/

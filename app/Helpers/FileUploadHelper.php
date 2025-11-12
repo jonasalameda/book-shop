@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Helpers\Core\Result;
+use Exception;
 use Psr\Http\Message\UploadedFileInterface;
 
 define("GIGABYTE_TO_BYTE", 1073741824);
@@ -47,12 +48,34 @@ class FileUploadHelper
             return Result::failure('Error uploading file');
         }
 
-        if ($uploadedFile->getSize() > ($maxSize > GIGABYTE_TO_BYTE) ? round($maxSize / (1024 * 1 - 24), 1) : $maxSize) {
-            return Result::failure("File too large (max {$maxSize}B");
+        $maxSizeMB = round($maxSize / (1024 * 1 - 24), 1);
+
+        if ($uploadedFile->getSize() >= $maxSize) {
+            return Result::failure("File too large (max {$maxSizeMB}MB, your file is {$uploadedFile->getSize()}");
         }
 
         if (!in_array($uploadedFile->getClientMediaType(), $allowedTypes)) {
             return Result::failure('Invalid file type. Only ' . implode(', ', $allowedTypes) . ' allowed.');
         }
+
+        $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
+
+        $filename = uniqid($filenamePrefix) . '.' . $extension;
+
+        if (!is_dir($directory)) {
+            if (mkdir($directory, 0755, true)) {
+                return Result::failure('Failed to create upload directory');
+            }
+        }
+
+        $destination = $directory . DIRECTORY_SEPARATOR . $filename;
+
+        try {
+            $uploadedFile->moveTo($destination);
+        } catch (Exception $e) {
+            return Result::failure('Failed to save uploaded file: ' . $e->getMessage());
+        }
+
+        return Result::success('File uploaded successfully', ['filename' => $filename]);
     }
 }

@@ -43,13 +43,26 @@ class ProductsController extends BaseController
         return $this->render($response, 'admin/products/productsIndexView.php', $data);
     }
 
-    public function show(Request $request, Response $response, array $args): Response {
+    public function show(Request $request, Response $response, array $args): Response
+    {
         return $response;
     }
-    public function create(Request $request, Response $response, array $args): Response {
-        return $response;
+    public function create(Request $request, Response $response, array $args): Response
+    {
+        $products = $this->products_model->getProducts();
+        $categories = $this->categories_model->getAll();
+
+        $data = [
+            'title' => 'Create Products',
+            'message' => 'Welcome to the home page',
+            'products' => $products,
+            'categories' => $categories
+        ];
+
+        return $this->render($response, 'admin/products/productsCreateView.php', $data);
     }
-    public function edit(Request $request, Response $response, array $args): Response {
+    public function edit(Request $request, Response $response, array $args): Response
+    {
         //* Step 1) Get the item id to be edited from the query string params section of the URI
         // dd("Editing the product: " . $product_id['id']);
         $product_id = $args['product_id'];
@@ -72,7 +85,8 @@ class ProductsController extends BaseController
 
         return $this->render($response, 'admin/products/productsEditView.php', $data);
     }
-    public function update(Request $request, Response $response, array $args): Response {
+    public function update(Request $request, Response $response, array $args): Response
+    {
         //! Handle the submission of the edit form
         //? Save the edited product info.
         //* 1) Get the received form data from the request
@@ -83,7 +97,8 @@ class ProductsController extends BaseController
         FlashMessage::success('Update Successful');
         return $this->redirect($request, $response, 'products.index');
     }
-    public function delete(Request $request, Response $response, array $args): Response {
+    public function delete(Request $request, Response $response, array $args): Response
+    {
         return $response;
     }
 }
