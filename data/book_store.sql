@@ -210,3 +210,22 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES ('1', 'Adventure', 'Exciting Adventure books that take you on a trip to the unknown.', current_timestamp());
+
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES ('2', 'Novel', 'Long, fictional narrative work, typically written in prose and published as a book.', current_timestamp());
+
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES ('3', 'Horror', 'Genre of art and media that aims to disturb, frighten, or scare an audience by eliciting feelings of fear, dread, or intense aversion.', current_timestamp());
+
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES ('4', 'Autobiography', "An account of someone's life written by that person", current_timestamp());
+
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES ('5', 'Fiction', 'Creative, imaginary work, such as novels, short stories, or films, that is not based on facts.', current_timestamp());
+
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `stock_quantity`, `created_at`, `updated_at`) VALUES ('1', '1', 'Harry Potter', 'Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling.', '21.99', '65', current_timestamp(), '2025-11-12 19:34:32');
+
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `stock_quantity`, `created_at`, `updated_at`) VALUES ('2', '2', 'Frankenstein', 'Frankenstein tells the story of Victor Frankenstein, a young scientist who creates a sapient creature in an unorthodox scientific experiment that involved putting it together with different body parts.', '18.99', '22', current_timestamp(), '2025-11-12 19:35:32');
+
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `stock_quantity`, `created_at`, `updated_at`) VALUES ('3', '3', 'Don Quixote', 'Spanish novel by Miguel de Cervantes. Originally published in two parts in 1605 and 1615, the novel is considered a founding work of Western literature and the first modern novel.', '24.99', '42', current_timestamp(), '2025-11-12 19:36:32');
+
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `stock_quantity`, `created_at`, `updated_at`) VALUES ('4', '2', 'Alice in Wonderland', 'Alice\'s Adventures in Wonderland is an 1865 English children\'s novel by Lewis Carroll, a mathematics don at the University of Oxford.', '24.99', '50', current_timestamp(), '2025-11-12 21:38:04');
