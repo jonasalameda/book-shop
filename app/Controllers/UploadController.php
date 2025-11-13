@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Helpers\FileUploadHelper;
 use App\Helpers\FlashMessage;
+use App\Helpers\SessionManager;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,42 +27,45 @@ class UploadController extends BaseController
     /**
      * Process file upload.
      */
-    public function upload(Request $request, Response $response, array $args): Response
-    {
-        // Get the uploaded file from the request.
-        $uploadedFiles = $request->getUploadedFiles();
-        $uploadedFile = $uploadedFiles['productimage'];
+    // public function upload(Request $request, Response $response, array $args): Response
+    // {
+    //     // Get the uploaded file from the request.
+    //     $uploadedFiles = $request->getUploadedFiles();
+    //     $uploadedFile = $uploadedFiles['productimage'];
 
-        // Configure upload settings.
-        $config = [
-            'directory' => __DIR__ . '/../../public/uploads/images',
-            'allowedTypes' => ['image/jpeg', 'image/png', 'image/gif'],
-            'maxSize' => 2 * 1024 * 1024, // 2MB in bytes
-            'filenamePrefix' => 'upload_'
-        ];
+    //     // Configure upload settings.
+    //     $config = [
+    //         'directory' => APP_UPLOAD_DIR,
+    //         'allowedTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+    //         'maxSize' => 2 * 1024 * 1024, // 2MB in bytes
+    //         'filenamePrefix' => 'upload_'
+    //     ];
 
-        // Use the helper to handle the upload.
-        $result = FileUploadHelper::upload($uploadedFile, $config);
+    //     // Use the helper to handle the upload.
+    //     $result = FileUploadHelper::upload($uploadedFile, $config);
 
-        // Handle the result.
-        if ($result->isSuccess()) {
-            // Get the filename from the result data.
-            $filename = $result->getData()['filename'];
+    //     // Handle the result.
+    //     if ($result->isSuccess()) {
+    //         // Get the filename from the result data.
+    //         $filename = $result->getData()['filename'];
 
-            // Store filename in session for display.
-            if (!isset($_SESSION['uploaded_files'])) {
-                $_SESSION['uploaded_files'] = [];
-            }
-            $_SESSION['uploaded_files'][] = $filename;
+    //         SessionManager::set('uploaded_files', []);
 
-            // Show success message.
-            FlashMessage::success($result->getMessage() . ": {$filename}");
-        } else {
-            // Show error message.
-            FlashMessage::error($result->getMessage());
-        }
+    //         // Store filename in session for display.
+    //         if (!isset($_SESSION['uploaded_files'])) {
+    //             $_SESSION['uploaded_files'] = [];
+    //         }
 
-        // Redirect back to the upload form using BaseController method.
-        return $this->redirect($request, $response, 'products.index');
-    }
+    //         $_SESSION['uploaded_files'][] = $filename;
+
+    //         // Show success message.
+    //         FlashMessage::success($result->getMessage() . ": {$filename}");
+    //     } else {
+    //         // Show error message.
+    //         FlashMessage::error($result->getMessage());
+    //     }
+
+    //     // Redirect back to the upload form using BaseController method.
+    //     return $this->redirect($request, $response, 'products.index');
+    // }
 }

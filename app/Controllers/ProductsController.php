@@ -61,6 +61,21 @@ class ProductsController extends BaseController
 
         return $this->render($response, 'admin/products/productsCreateView.php', $data);
     }
+
+    public function add(Request $request, Response $response, array $args): Response
+    {
+        $products = $this->products_model->getProducts();
+        
+        $data = [
+            'title' => 'Create Products',
+            'message' => 'Welcome to the home page',
+            'products' => $products,
+        ];
+
+        return $this->render($response, 'admin/products/productsIndexView.php', $data);
+    }
+
+
     public function edit(Request $request, Response $response, array $args): Response
     {
         //* Step 1) Get the item id to be edited from the query string params section of the URI
