@@ -13,7 +13,7 @@ node_modules/
 #.vscode
 
 # Image uploads
-uploads/images
+uploads/*
 
 # Directories holding app-generated files.
 # Keep the logs/ directory
