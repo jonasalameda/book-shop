@@ -120,6 +120,22 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD FOREIGN KEY (category_id) REFERENCES categories(id);
+
 --
 -- Indexes for table `orders`
 --
@@ -140,13 +156,6 @@ ALTER TABLE `order_items`
   ADD FOREIGN KEY (order_id) REFERENCES orders(id),
   ADD FOREIGN KEY (product_id) REFERENCES products(id);
 
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD FOREIGN KEY (category_id) REFERENCES categories(id);
-
 -- ALTER TABLE `products`
 
 --
@@ -157,14 +166,6 @@ ALTER TABLE `product_images`
   ADD FOREIGN KEY (product_id) REFERENCES products(id);
 
 -- ALTER TABLE `product_images`
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
