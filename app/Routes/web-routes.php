@@ -33,7 +33,7 @@ return static function (Slim\App $app): void {
 
         // File upload routes
         // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');
-        $group->post('/products/upload', [UploadController::class, 'upload'])->setName('upload.process');
+        $group->post('/products/upload', [ProductsController::class, 'add'])->setName('add.process');
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
@@ -42,15 +42,6 @@ return static function (Slim\App $app): void {
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
-
-    $app->get('/shops', [ShopController::class, 'getShops'])
-        ->setName('shops.getShops');
-
-    $app->get('/shops/search', [ShopController::class, 'searchShops'])
-        ->setName('shops.searchShops');
-
-    $app->get('/shops/{id}', [ShopController::class, 'getShop'])
-        ->setName('shops.getShop');
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {
