@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Helpers\Core\AppSettings;
+use App\Helpers\FileUploadHelper;
+use App\Helpers\FlashMessage;
+use App\Helpers\SessionManager;
 use Slim\Views\PhpRenderer;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -88,5 +91,53 @@ abstract class BaseController
         $route_parser = RouteContext::fromRequest($request)->getRouteParser();
         $target_uri = $route_parser->urlFor($route_name, $uri_args, $query_params);
         return $response->withStatus(302)->withHeader('Location', $target_uri);
+    }
+
+    /**
+     * Process file upload.
+     */
+    public function upload(Request $request, Response $response, array $args, array $allowedTypes, int $maxSize, string $filenamePrefix, string $routeName): Response
+    {
+        // Get the uploaded file from the request.
+        $uploadedFiles = $request->getUploadedFiles();
+        $uploadedFile = $uploadedFiles['productimage'];
+
+        // Configure upload settings.
+        $config = [
+            'directory' => APP_UPLOAD_DIR,
+            // DEFAULT: ['image/jpeg', 'image/png', 'image/gif']
+            'allowedTypes' => $allowedTypes,
+            // DEFAULT: 2 * 1024 * 1024 // 2MB in bytes
+            'maxSize' => $maxSize,
+            // DEFAULT: 'upload_'
+            'filenamePrefix' => $filenamePrefix,
+        ];
+
+        // Use the helper to handle the upload.
+        $result = FileUploadHelper::upload($uploadedFile, $config);
+
+        // Handle the result.
+        if ($result->isSuccess()) {
+            // Get the filename from the result data.
+            $filename = $result->getData()['filename'];
+
+            // SessionManager::set('uploaded_files', []);
+
+            // Store filename in session for display.
+            if (!isset($_SESSION['uploaded_files'])) {
+                $_SESSION['uploaded_files'] = [];
+            }
+
+            $_SESSION['uploaded_files'][] = $filename;
+
+            // Show success message.
+            FlashMessage::success($result->getMessage() . ": {$filename}");
+        } else {
+            // Show error message.
+            FlashMessage::error($result->getMessage());
+        }
+
+        // Redirect back to the upload form using BaseController method.
+        return $this->redirect($request, $response, 'products.index');
     }
 }
