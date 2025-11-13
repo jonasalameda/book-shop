@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Helpers\Core\AppSettings;
+use App\Helpers\Core\Result as CoreResult;
 use App\Helpers\FileUploadHelper;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
 use Slim\Views\PhpRenderer;
 use DI\Container;
+use \App\Helpers\Core\Result;
+use PgSql\Result as PgSqlResult;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteContext;
@@ -96,20 +99,20 @@ abstract class BaseController
     /**
      * Process file upload.
      */
-    public function upload(Request $request, Response $response, array $args, array $allowedTypes, int $maxSize, string $filenamePrefix, string $routeName): Response
+    public function upload(Request $request, array $allowedTypes, int $maxSize, string $filenamePrefix, string $fileDir): Result
     {
         // Get the uploaded file from the request.
         $uploadedFiles = $request->getUploadedFiles();
-        $uploadedFile = $uploadedFiles['productimage'];
+        $uploadedFile = $uploadedFiles['product_image'];
 
         // Configure upload settings.
         $config = [
-            'directory' => APP_UPLOAD_DIR,
-            // DEFAULT: ['image/jpeg', 'image/png', 'image/gif']
+            'directory' => APP_UPLOAD_DIR . '/' . $fileDir,
+            // ? DEFAULT: ['image/jpeg', 'image/png', 'image/gif']
             'allowedTypes' => $allowedTypes,
-            // DEFAULT: 2 * 1024 * 1024 // 2MB in bytes
+            // ? DEFAULT: 2 * 1024 * 1024 // 2MB in bytes
             'maxSize' => $maxSize,
-            // DEFAULT: 'upload_'
+            // ? DEFAULT: 'upload_'
             'filenamePrefix' => $filenamePrefix,
         ];
 
@@ -132,12 +135,13 @@ abstract class BaseController
 
             // Show success message.
             FlashMessage::success($result->getMessage() . ": {$filename}");
+
+            return Result::success("Successfully uploaded.", $result->getData());
         } else {
             // Show error message.
             FlashMessage::error($result->getMessage());
-        }
 
-        // Redirect back to the upload form using BaseController method.
-        return $this->redirect($request, $response, 'products.index');
+            return Result::failure("Successfully uploaded.", $result->getErrors());
+        }
     }
 }

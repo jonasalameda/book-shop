@@ -47,16 +47,16 @@ class ProductsController extends BaseController
     {
         return $response;
     }
+
     public function create(Request $request, Response $response, array $args): Response
     {
-        $products = $this->products_model->getProducts();
+        // $products = $this->products_model->getProducts();
         $categories = $this->categories_model->getAll();
 
         $data = [
             'title' => 'Create Products',
             'message' => 'Welcome to the home page',
-            'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
         ];
 
         return $this->render($response, 'admin/products/productsCreateView.php', $data);
@@ -65,14 +65,24 @@ class ProductsController extends BaseController
     public function add(Request $request, Response $response, array $args): Response
     {
         $products = $this->products_model->getProducts();
-        
+        $productId = $this->products_model->createProduct($request->getParsedBody());
+        $imageData = $this->upload($request, ['image/jpeg', 'image/png', 'image/gif'], 2 * 1024 * 1024, 'product_', "products")->getData();
+        // ? DEFAULT: ['image/jpeg', 'image/png', 'image/gif']
+        // ? DEFAULT: 2 * 1024 * 1024 // 2MB in bytes
+        // ? DEFAULT: 'upload_'
+        $this->products_model->createProductImage([
+            "prod_id" => $productId,
+            "file_path" => $imageData['filepath'],
+            "is_primary" => true,
+        ]);
+
         $data = [
             'title' => 'Create Products',
             'message' => 'Welcome to the home page',
             'products' => $products,
         ];
 
-        return $this->render($response, 'admin/products/productsIndexView.php', $data);
+        return $this->redirect($request, $response, 'products.index', $data);
     }
 
 

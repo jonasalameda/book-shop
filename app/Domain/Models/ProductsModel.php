@@ -52,26 +52,29 @@ class ProductsModel extends BaseModel
 
     public function createProduct(array $productData)
     {
-        return $this->execute(
-        'INSERT INTO `products` (name, description, price, stock_quantity) VALUES :name, :description, :price, :stock_quantity',
+        $this->execute(
+            'INSERT INTO `products` (category_id, name, description, price, stock_quantity, updated_at) VALUES (:category_id, :name, :description, :price, :stock_quantity, :updated_at)',
             [
-                'name' => $productData['name'],
+                'category_id' => (int) $productData['category_id'],
+                'name' => $productData['product_name'],
                 'description' => $productData['description'],
-                'price' => $productData['price'],
-                'stock_quantity' => $productData['stock_quantity'],
-                'updated_at' => date('Y-m-d H:i:s')
+                'price' => (float) $productData['price'],
+                'stock_quantity' => (int) $productData['stock_quantity'],
+                'updated_at' => date('Y-m-d H:i:s'),
             ]
         );
+
+        return $this->lastInsertId();
     }
 
     public function createProductImage(array $data)
     {
         return $this->execute(
-        'INSERT INTO `product_images` (product_id, file_path, is_primary) VALUES :product_id, :file_path, :is_primary',
+            'INSERT INTO `product_images` (product_id, file_path, is_primary) VALUES (:product_id, :file_path, :is_primary)',
             [
                 'product_id' => $data['prod_id'],
                 'file_path' => $data['file_path'],
-                'is_primary' => $data['is_primary'],
+                'is_primary' => $data['is_primary'] ?? false,
             ]
         );
     }
