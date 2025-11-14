@@ -1,10 +1,11 @@
 <?php
+//! Needs to be modified and corrected still. Right now it uses 'products'
+//TODO: change view to match category creation
 
 use App\Helpers\ViewHelper;
-//TODO: set the page title dynamically based on the view being rendered in the controller.
 $page_title = 'Create Category';
 
-//TODO: We need to load an admin-specific header.
+//load an admin-specific header.
 ViewHelper::adminHeader($page_title);
 
 // dd($product)
