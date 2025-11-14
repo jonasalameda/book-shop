@@ -49,25 +49,38 @@ class CategoriesController extends BaseController
 
     public function create(Request $request, Response $response, array $args): Response
     {
-        return $response;
+        $categories = $this->categories_model->getAll();
+
+        $data = [
+            'title' => 'Create Categories',
+            'message' => 'Welcome to the home page',
+            'categories' => $categories,
+        ];
+
+        return $this->render($response, 'admin/categories/categoriesCreateView.php', $data);
     }
 
     public function edit(Request $request, Response $response, array $args): Response
     {
-        $filters = $request->getQueryParams();
+        //* Step 1) Get the item id to be edited from the query string params section of the URI
+        // dd("Editing the product: " . $product_id['id']);
         $category_id = $args['category_id'];
+        // dd("Editing product: " . $product_id);
 
+        //* Step 2.a) Pull the existing item identified by the received ID from the database.
         $category = $this->categories_model->getCategoryById($category_id);
 
-        $categories = $this->categories_model->getAll();
+        //* Step 2.b) Fetch the list of categories from the DB
+        // dd($product);
 
-        dd($category);
+        //* Step 3) Pass it to the view where the update/editing form filled with item info will be rendered
 
         $data = [
-            "category",
+            'title' => 'Create Products',
+            'categories' => $category,
         ];
 
-        return $this->render($response, 'edit', $data);
+        return $this->render($response, 'admin/categories/categoriesEditView.php', $data);
     }
 
     public function update(Request $request, Response $response, array $args): Response

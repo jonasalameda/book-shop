@@ -31,7 +31,6 @@ return static function (Slim\App $app): void {
         //! Add Categories here
         $group->get('/categories', [CategoriesController::class, 'index'])
                     ->setName('categories.index');
-
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
                     ->setName('categories.index');
         //* handle save edited product info
