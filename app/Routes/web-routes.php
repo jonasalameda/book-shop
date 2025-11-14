@@ -6,6 +6,7 @@ declare(strict_types=1);
  * This file contains the routes for the web application.
  */
 
+use App\Controllers\CategoriesController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ShopController;
@@ -28,6 +29,11 @@ return static function (Slim\App $app): void {
         $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']);
         $group->get('/products/create', [ProductsController::class, 'create']);
         //! Add Categories here
+        $group->get('/categories', [CategoriesController::class, 'index'])
+                    ->setName('categories.index');
+
+        $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
+                    ->setName('categories.index');
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
 
