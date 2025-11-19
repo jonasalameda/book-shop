@@ -5,9 +5,52 @@ a.navbar-brand {
     align-content: end;
 }
 
-.navbar {
+.navbar-main {
+    top: 0;
     font-family: "NanumSquare", Courier, monospace;
     position: sticky;
+    width: 100%;
+}
+
+.nav-link {
+    position: relative;
+}
+
+/* Fade in */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: whitesmoke;
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+    opacity: 1;
+    transform: translate3d(0, 1px, 0);
+}
+
+.nav-link::after {
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+    transform: scale(1);
+}
+
+.nav-link:hover {
+    animation-name: navbarAnimation;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
 }
 
 .navbar[data-bs-theme="dark"] {
@@ -24,4 +67,16 @@ a.navbar-brand {
         format("woff");
     font-weight: normal;
     font-display: swap;
+}
+
+@keyframes navbarAnimation {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
