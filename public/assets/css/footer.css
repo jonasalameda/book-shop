@@ -1,0 +1,64 @@
+#footer {
+    width: 100%;
+}
+
+.footer-link {
+    position: relative;
+    font-family: "NanumSquare", Courier, monospace;
+    display: inline-block;
+    text-decoration: none;
+    margin: 0 5%;
+    color: white;
+}
+
+/* Fade in */
+.footer-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: whitesmoke;
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.footer-link:hover::after,
+.footer-link:focus::after {
+    opacity: 1;
+    transform: translate3d(0, 1px, 0);
+}
+
+.footer-link::after {
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+
+.footer-link:hover::after,
+.footer-link:focus::after {
+    transform: scale(1);
+}
+
+.footer-link:hover {
+    animation-name: footerAnimation;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+}
+
+@keyframes footerAnimation {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
