@@ -12,6 +12,7 @@ use App\Controllers\HomeController;
 use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
 use App\Controllers\UploadController;
+use App\Controllers\AuthController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -47,6 +48,14 @@ return static function (Slim\App $app): void {
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
+
+    $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
+
+    $app->post('/register', [AuthController::class, 'store']);
+
+
+
+
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {
