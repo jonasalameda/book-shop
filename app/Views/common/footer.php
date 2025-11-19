@@ -1,10 +1,40 @@
 <div id="footer">
     <div class="container-fluid">
-        <div class="row text-center">
-            <div class="col">
-                <a class="footer-link" href="#">Conditions of use</a>
-                <a class="footer-link" href="#">Privacy Notice</a>
-                <a class="footer-link" href="#">Cookies Notice</a>
+        <div class="row text-center justify-content-center">
+            <div class="col-2">
+                <ul>
+                    <li>
+                        <a class="footer-link" href="#"><b>Conditions of use</b></a>
+                    </li>
+                    <li>
+                        <a class="footer-link" href="#">FAQ</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col-2">
+                <ul>
+                    <li><a class="footer-link" href="#"><b>Privacy Notice</b></a></li>
+                    <li><a class="footer-link" href="#">Shipping policies</a></li>
+                </ul>
+
+            </div>
+
+            <div class="col-2">
+                <ul>
+                    <li>
+                        <a class="footer-link" href="#"><b>Contact Us</b></a>
+                    </li>
+
+                    <li>
+                        <a class="footer-link" href="#">Supply to Ruina</a>
+                    </li>
+
+                    <li>
+                        <a class="footer-link" href="#">Sell on Ruina</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

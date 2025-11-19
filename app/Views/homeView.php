@@ -18,10 +18,16 @@ ViewHelper::loadHeader($page_title);
             <h2><i>"May you find your book in this place"</i></h2>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <button class="btn-start">Get Started</button>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid text-start featured">
-    
+
 </div>
 
 <?php

@@ -14,10 +14,9 @@
 
 <body>
     <nav class="navbar navbar-main" data-bs-theme="dark">
-        <div class="container-fluid">
+        <div class="container-fluid text-center">
             <a class="navbar-brand" href="/book-shop/">
-                <img src="/book-shop/public/assets/imgs/tail.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                Ruina
+                <img src="/book-shop/public/assets/imgs/tail.png" alt="Logo" class="d-inline-block align-text-top" width="35" height="35">
             </a>
             <a class="nav-link" href="/book-shop/featured">Featured</a>
             <a class="nav-link" href="/book-shop/catalog">Catalog</a>
