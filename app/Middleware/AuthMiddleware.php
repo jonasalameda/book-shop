@@ -4,11 +4,13 @@ namespace App\Middleware;
 
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response as Psr7Response;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Factory\Psr17\NyholmPsr17Factory;
 use Slim\Routing\RouteContext;
 
 class AuthMiddleware implements MiddlewareInterface
@@ -32,8 +34,9 @@ class AuthMiddleware implements MiddlewareInterface
             FlashMessage::error('Please log in to access this page');
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             $loginUrl = $routeParser->urlFor('auth.login');
-            $response = new Psr7Response();
-            return $response->withHeader('Location', $loginUrl)->withStatus(302);
+
+            $factory = new Psr17Factory();
+            return $factory->createResponse(302);
         }
 
         // If authenticated, continue to the next middleware/route handler

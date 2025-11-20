@@ -4,6 +4,7 @@ namespace App\Middleware;
 
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response as Psr7Response;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -41,14 +42,13 @@ class AdminAuthMiddleware implements MiddlewareInterface
             FlashMessage::error("Access denied. Admin privileges required.");
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             $loginUrl = $routeParser->urlFor('user.dashboard');
-            $response = new Psr7Response();
-            return $response->withHeader('Location', $loginUrl)->withStatus(302);
+            $factory = new Psr17Factory();
+            return $factory->createResponse(302);
         }
 
         // If authenticated AND admin, continue to admin route
         // TODO: Return $handler->handle($request);
 
         return $handler->handle($request);
-
     }
 }
