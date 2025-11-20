@@ -31,8 +31,9 @@ class AdminAuthMiddleware implements MiddlewareInterface
             FlashMessage::error("Please log in to access the admin panel.");
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             $loginUrl = $routeParser->urlFor('auth.login');
-            $response = new Psr7Response();
-            return $response->withHeader('Location', $loginUrl)->withStatus(302);
+
+            $factory = new Psr17Factory();
+            return $factory->createResponse(302);
         }
 
         // TODO: If authenticated but role is NOT 'admin':
@@ -42,6 +43,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
             FlashMessage::error("Access denied. Admin privileges required.");
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             $loginUrl = $routeParser->urlFor('user.dashboard');
+
             $factory = new Psr17Factory();
             return $factory->createResponse(302);
         }

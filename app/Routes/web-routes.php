@@ -26,16 +26,22 @@ return static function (Slim\App $app): void {
     $app->group('/admin', function ($group) {
         $group->get('/dashboard', [DashboardController::class, 'index'])
             ->setName('dashboard.index');
+            
         $group->get('/products', [ProductsController::class, 'index'])
             ->setName('products.index');
+
         //* GET route for showing the product edit form
         $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']);
+
         $group->get('/products/create', [ProductsController::class, 'create']);
+
         //! Add Categories here
         $group->get('/categories', [CategoriesController::class, 'index'])
                     ->setName('categories.index');
+
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
                     ->setName('categories.index');
+
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
 
@@ -63,13 +69,7 @@ return static function (Slim\App $app): void {
 
     $app->get('/dashboard', [AuthController::class, 'dashboard'])
     ->setName('user.dashboard')
-    ->add(AuthMiddleware::class); //checks if user is logged in 
-
-
-
-
-
-
+    ->add(AuthMiddleware::class); //checks if user is logged in
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {

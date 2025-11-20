@@ -243,7 +243,7 @@ class AuthController extends BaseController
         //       Hint: if ($user['role'] === 'admin') { ... } else { ... }
 
         if ($user['role'] === 'admin') {
-            return $this->redirect($request, $response, 'admin.dashboard');
+            return $this->redirect($request, $response, 'dashboard.index');
         } else {
             return $this->redirect($request, $response, 'user.dashboard');
         }
