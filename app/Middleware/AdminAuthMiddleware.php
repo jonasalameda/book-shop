@@ -37,8 +37,18 @@ class AdminAuthMiddleware implements MiddlewareInterface
         // TODO: If authenticated but role is NOT 'admin':
         //       - Use FlashMessage::error() with message: "Access denied. Admin privileges required."
         //       - Redirect to 'user.dashboard' route
-        
+        if ($isAuthenticated && $userRole !== 'admin') {
+            FlashMessage::error("Access denied. Admin privileges required.");
+            $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+            $loginUrl = $routeParser->urlFor('user.dashboard');
+            $response = new Psr7Response();
+            return $response->withHeader('Location', $loginUrl)->withStatus(302);
+        }
+
         // If authenticated AND admin, continue to admin route
         // TODO: Return $handler->handle($request);
+
+        return $handler->handle($request);
+
     }
 }

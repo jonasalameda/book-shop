@@ -25,7 +25,7 @@ class UserModel extends BaseModel {
         //       Insert: first_name, last_name, username, email, password_hash, role
         //       Use named parameters (e.g., :first_name, :last_name, etc.)
         $this->execute(
-            'INSERT INTO `users` (first_name, last_name, username, email, password_hash, role, updated_at) VALUES (:first_name, :last_name, :username, :email, :password_hash, :role)',
+            'INSERT INTO `users` (first_name, last_name, username, email, password_hash, role) VALUES (:first_name, :last_name, :username, :email, :password_hash, :role)',
             [
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
@@ -117,8 +117,38 @@ class UserModel extends BaseModel {
         // TODO: Execute the query and return true if count > 0, false otherwise
 
         $sql = "SELECT COUNT(*) AS count FROM {$this->users_table} WHERE username = :username GROUP BY username";
-        $user = $this->selectOne($sql, ["username" => $username]) > 0 ? true : false;
-        return $user;
+        $user = $this->selectOne($sql, ["username" => $username]);
+        return $user > 0;
+    }
+
+    /**
+     * Verify user credentials by email/username and password.
+     *
+     * @param string $identifier Email or username
+     * @param string $password Plain-text password to verify
+     * @return array|null User data if credentials are valid, null otherwise
+     */
+    public function verifyCredentials(string $identifier, string $password): ?array
+    {
+        // TODO: Try to find user by email first
+        $user = $this->findByEmail($identifier);
+
+        // TODO: If user not found by email, try finding by username
+        if (!$user) {
+            $user = $this->findByUsername($identifier);
+        }
+
+        // TODO: If user still not found, return null (invalid credentials)
+
+        // TODO: Verify the password using password_verify($password, $user['password_hash'])
+        //       If password is valid, return $user
+        //       If password is invalid, return null
+
+        // Hint: Structure should be:
+        if (password_verify($password, $user['password_hash'])) {
+            return $user;
+        }
+        return null;
     }
 
 
