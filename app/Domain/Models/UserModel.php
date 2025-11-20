@@ -5,7 +5,8 @@ namespace App\Domain\Models;
 use App\Helpers\Core\PDOService;
 
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
     private $users_table = "users";
 
@@ -16,7 +17,8 @@ class UserModel extends BaseModel {
      * @param array $data User data (first_name, last_name, username, email, password, role)
      * @return int The ID of the newly created user
      */
-    public function createUser(array $data): int {
+    public function createUser(array $data): int
+    {
         // TODO: Hash the password using password_hash() with PASSWORD_BCRYPT
         //       Store the result in $hashedPassword variable
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
@@ -60,7 +62,12 @@ class UserModel extends BaseModel {
 
         $sql = "SELECT * FROM {$this->users_table} WHERE email = :email LIMIT 1";
         $user = $this->selectOne($sql, ["email" => $email]);
-        return $user;
+
+        if (!$user) {
+            return null;
+        }
+        
+        return $user; // * array|null <-> array|false
     }
 
     /**
@@ -79,6 +86,11 @@ class UserModel extends BaseModel {
 
         $sql = "SELECT * FROM {$this->users_table} WHERE username = :username LIMIT 1";
         $user = $this->selectOne($sql, ["username" => $username]);
+
+        if (!$user) {
+            return null;
+        }
+
         return $user;
     }
 
@@ -150,7 +162,4 @@ class UserModel extends BaseModel {
         }
         return null;
     }
-
-
 }
-
