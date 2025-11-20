@@ -69,7 +69,7 @@ class AuthController extends BaseController
         //       If invalid, add error: "Invalid email format."
         //       Hint: if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { ... }
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format";
         }
 
@@ -117,6 +117,11 @@ class AuthController extends BaseController
 
         if (!empty($errors)) {
             FlashMessage::error("Error authenticating user");
+
+            foreach ($errors as $key => $msg) {
+                FlashMessage::error($msg);
+            }
+
             return $this->redirect($request, $response, 'auth.register');
         }
 
@@ -145,7 +150,6 @@ class AuthController extends BaseController
 
             FlashMessage::success("Registration successful! Please log in.");
             return $this->redirect($request, $response, 'auth.login');
-
         } catch (\Exception $e) {
             // TODO: Display error message using FlashMessage::error()
             //       Message: "Registration failed. Please try again."
@@ -154,14 +158,12 @@ class AuthController extends BaseController
             dd($e);
             FlashMessage::error("Registration failed. Please try again.");
             return $this->redirect($request, $response, 'auth.register');
-
-
         }
     }
 
     /**
- * Display the login form (GET request).
- */
+     * Display the login form (GET request).
+     */
     public function login(Request $request, Response $response, array $args): Response
     {
         // TODO: Create a $data array with 'title' => 'Login'
@@ -171,12 +173,11 @@ class AuthController extends BaseController
 
         // TODO: Render 'auth/login.php' view and pass $data
         return $this->render($response, 'auth/login.php', $data);
-
     }
 
-/**
- * Process login form submission (POST request).
- */
+    /**
+     * Process login form submission (POST request).
+     */
     public function authenticate(Request $request, Response $response, array $args): Response
     {
         // TODO: Get form data using getParsedBody()
@@ -263,7 +264,6 @@ class AuthController extends BaseController
         // TODO: Redirect to 'auth.login' route
 
         return $this->redirect($request, $response, 'auth.login');
-
     }
 
     /**
@@ -279,6 +279,5 @@ class AuthController extends BaseController
 
         // TODO: Render 'user/dashboard.php' view and pass $data
         return $this->render($response, 'user/dashboard.php', $data);
-
     }
 }

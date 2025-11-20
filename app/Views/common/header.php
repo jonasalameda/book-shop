@@ -21,5 +21,6 @@
             <a class="nav-link" href="/book-shop/featured">Featured</a>
             <a class="nav-link" href="/book-shop/catalog">Catalog</a>
             <a class="nav-link" href="/book-shop/contact">Contact Us</a>
+            <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register">Sign In</a>
         </div>
     </nav>
