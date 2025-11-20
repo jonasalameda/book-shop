@@ -10,7 +10,6 @@
                         <a class="footer-link" href="#">FAQ</a>
                     </li>
                 </ul>
-
             </div>
 
             <div class="col-2">

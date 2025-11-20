@@ -222,6 +222,11 @@ class AuthController extends BaseController
 
         if ($user === null) {
             $errors[] = "Invalid credentials. Please Try again.";
+
+            foreach ($errors as $key => $msg) {
+                FlashMessage::error($msg);
+            }
+
             return $this->redirect($request, $response, 'auth.login');
         }
 

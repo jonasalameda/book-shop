@@ -36,7 +36,8 @@ class AuthMiddleware implements MiddlewareInterface
             $loginUrl = $routeParser->urlFor('auth.login');
 
             $factory = new Psr17Factory();
-            return $factory->createResponse(302);
+            $response =  $factory->createResponse(302);
+            return $response->withHeader('Location', $loginUrl)->withStatus(302);
         }
 
         // If authenticated, continue to the next middleware/route handler

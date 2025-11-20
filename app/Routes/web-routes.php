@@ -26,7 +26,7 @@ return static function (Slim\App $app): void {
     $app->group('/admin', function ($group) {
         $group->get('/dashboard', [DashboardController::class, 'index'])
             ->setName('dashboard.index');
-            
+
         $group->get('/products', [ProductsController::class, 'index'])
             ->setName('products.index');
 
@@ -48,7 +48,7 @@ return static function (Slim\App $app): void {
         // File upload routes
         // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');
         $group->post('/products/upload', [ProductsController::class, 'add'])->setName('add.process');
-    });
+    })->add(AdminAuthMiddleware::class);
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
     $app->get('/', [HomeController::class, 'index'])
