@@ -13,6 +13,8 @@ use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
 use App\Controllers\UploadController;
 use App\Controllers\AuthController;
+use App\Middleware\AuthMiddleware;
+use App\Middleware\AdminAuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -52,6 +54,18 @@ return static function (Slim\App $app): void {
     $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
 
     $app->post('/register', [AuthController::class, 'store']);
+
+    $app->get('/login', [AuthController::class, 'login'])->setName('auth.login');
+
+    $app->post('/login', [AuthController::class, 'authenticate']);
+
+    $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
+
+    $app->get('/dashboard', [AuthController::class, 'dashboard'])
+    ->setName('user.dashboard')
+    ->add(AuthMiddleware::class); //checks if user is logged in 
+
+
 
 
 

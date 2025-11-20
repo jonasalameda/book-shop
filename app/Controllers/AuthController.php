@@ -262,7 +262,7 @@ class AuthController extends BaseController
 
         // TODO: Redirect to 'auth.login' route
 
-            return $this->redirect($request, $response, 'auth.login');
+        return $this->redirect($request, $response, 'auth.login');
 
     }
 
