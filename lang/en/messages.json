@@ -1,34 +1,36 @@
 {
-  "nav": {
-    "featured": "Home",
-    "catalog": "Products",
-    "contact_us": "Cart",
-    "sign_in": "Sign in"
-  },
-  "home": {
-    "welcome": "Shop of Ruina \"May you find your book in this place\"",
-    "start_button": "Get Started"
-  },
-  "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete"
-  },
-  "register": {
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "username": "Username",
-    "email": "Email",
-    "password": "Password",
-    "password_condition": "Password must be at least 8 characters long and contain at least one number.",
-    "confirm_password": "Confirm Password",
-    "register_button": "Register",
-    "login_msg": "Already have an account? Login here"
-  },
-  "errors": {
-    "404": {
-      "title": "404 - Page Not Found",
-      "message": "Oops! The page you are looking for does not exist."
+    "nav": {
+        "featured": "Featured",
+        "catalog": "Catalog",
+        "contact_us": "Contact Us",
+        "sign_in": "Sign in"
+    },
+    "home": {
+        "title": "Home",
+        "welcome": "Shop of Ruina",
+        "subtitle": "\"May you find your book in this place\"",
+        "start_button": "Get Started"
+    },
+    "common": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete"
+    },
+    "register": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "password_condition": "Password must be at least 8 characters long and contain at least one number.",
+        "confirm_password": "Confirm Password",
+        "register_button": "Register",
+        "login_msg": "Already have an account? Login here"
+    },
+    "errors": {
+        "404": {
+            "title": "404 - Page Not Found",
+            "message": "Oops! The page you are looking for does not exist."
+        }
     }
-  }
 }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Middleware\ExceptionMiddleware;
+use App\Middleware\LocaleMiddleware;
 use App\Middleware\SessionMiddleware;
 use Slim\App;
 
@@ -20,4 +21,6 @@ return function (App $app) {
     $app->add(ExceptionMiddleware::class);
     // option 2
     $app->add(SessionMiddleware::class);
+    // Detect and set the application locale
+    $app->add(LocaleMiddleware::class);
 };

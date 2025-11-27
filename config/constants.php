@@ -11,6 +11,8 @@ define('APP_ROOT_DIR_NAME', basename(dirname(__FILE__, 2)));
 // Define the path of the application's views directory.
 define('APP_VIEWS_PATH', realpath(APP_BASE_DIR_PATH . '/app/Views'));
 
+// Define the path of the application's localization files
+define('APP_LANG_PATH', realpath(APP_BASE_DIR_PATH . '/lang'));
 
 
 //* HTTP response status code.
