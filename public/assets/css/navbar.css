@@ -16,6 +16,20 @@ a.navbar-brand {
     position: relative;
 }
 
+.sign-in {
+    border-radius: 5%;
+    border: 2px solid rgba(230, 192, 146, 0.697);
+    background-color: transparent;
+    transition: 700ms;
+    padding: 0.5%;
+}
+
+.sign-in:hover {
+    background-color: rgba(230, 192, 146, 0.87);
+    border: 2px solid rgba(230, 192, 146, 0.87);
+    color: #332a20;
+}
+
 /* Fade in */
 .nav-link::after {
     content: "";

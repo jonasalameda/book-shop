@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Authentication System</title>
+    <link rel="stylesheet" href="/book-shop/public/assets/css/register.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -54,7 +57,7 @@
                             <input type="hidden" name="role" value="customer">
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn-register ">Register</button>
                             </div>
                         </form>
 
@@ -69,4 +72,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -20,7 +20,7 @@ class ProductsModel extends BaseModel
     public function getProducts(): mixed
     {
 
-        $sql = "SELECT * FROM {$this->products_table}";
+        $sql = "SELECT * FROM {$this->products_table} ORDER BY id ASC";
         $products = $this->selectAll($sql);
         return $products;
     }
@@ -77,5 +77,44 @@ class ProductsModel extends BaseModel
                 'is_primary' => $data['is_primary'] ?? false,
             ]
         );
+    }
+
+    public function searchProducts(string $searchTerm = '', ?int $categoryId = null): array
+    {
+        // TODO: Create base SQL query with LEFT JOINs
+        // - Join products (p) with categories (c) on category_id
+        // - Join with product_images (pi) where is_primary = 1
+        // - Select: p.id, p.name, p.description, p.price, p.stock_quantity,
+        //              c.name AS category_name, c.id AS category_id, pi.file_path AS image_path
+        // - Start with WHERE 1=1 to make adding conditions easier
+        $sql = "SELECT p.id, p.name, p.description, p.price, p.stock_quantity,
+                 c.name AS category_name, c.id AS category_id, pi.file_path AS image_path FROM products p LEFT JOIN categories c ON p.category_id = c.id
+                 LEFT JOIN product_images pi ON p.id = pi.product_id
+                 WHERE p.name CONCAT('%', :search, '%') OR
+                    p.description LIKE :search AND
+                    c.id = :category_id
+                GROUP BY p.id
+                ORDER BY p.name ASC";
+
+        // TODO: Initialize empty params array
+        $params = [];
+        // TODO: If searchTerm is not empty:
+        // - Add condition: (p.name LIKE :search OR p.description LIKE :search)
+        // - Add to params: 'search' => '%' . $searchTerm . '%'
+        if (!empty($searchTerm)) {
+            $params['search'] = $searchTerm;
+        }
+
+        // TODO: If categoryId is provided and > 0:
+        // - Add condition: p.category_id = :category_id
+        // - Add to params: 'category_id' => $categoryId
+        if ($categoryId > 0) {
+            $params['category_id'] = $categoryId;
+        }
+
+        // TODO: Add GROUP BY p.id and ORDER BY p.name ASC
+
+        // TODO: Return results using $this->selectAll($sql, $params)
+        return $this->selectAll($sql, $params);
     }
 }

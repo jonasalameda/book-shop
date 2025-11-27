@@ -15,7 +15,7 @@ class CategoriesModel extends BaseModel
 
     public function getAll(): array
     {
-        $sql = "SELECT * FROM {$this->categories_table} ";
+        $sql = "SELECT * FROM {$this->categories_table} ORDER BY name ASC";
         return $this->selectAll($sql);
     }
 

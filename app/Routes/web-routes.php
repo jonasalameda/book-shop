@@ -37,10 +37,10 @@ return static function (Slim\App $app): void {
 
         //! Add Categories here
         $group->get('/categories', [CategoriesController::class, 'index'])
-                    ->setName('categories.index');
+            ->setName('categories.index');
 
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
-                    ->setName('categories.index');
+            ->setName('categories.index');
 
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
@@ -68,8 +68,14 @@ return static function (Slim\App $app): void {
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
     $app->get('/dashboard', [AuthController::class, 'dashboard'])
-    ->setName('user.dashboard')
-    ->add(AuthMiddleware::class); //checks if user is logged in
+        ->setName('user.dashboard')
+        // checks if user is logged in
+        ->add(AuthMiddleware::class);
+
+    $app->get('/products', [ProductsController::class, 'userIndex']);
+
+    $app->get('/api/products/search', [ProductsController::class, 'search'])
+        ->setName('api.products.search');
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {
