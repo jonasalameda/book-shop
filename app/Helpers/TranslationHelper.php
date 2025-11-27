@@ -74,9 +74,11 @@ class TranslationHelper
         // TODO: Loop through each locale in availableLocales array
         $availableLocales = $this->availableLocales;
 
-        foreach ($availableLocales as $locale => $value) {
-            $filePath = realpath("lang" . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json");
-            if (is_file($filePath)) {
+        foreach ($availableLocales as $locale) {
+            // $filePath = realpath("lang" . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json");
+            $filePath = $this->langPath .   DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json";
+            // dd($filePath);
+            if ($filePath) {
                 $this->translator->addResource('json', $filePath, $locale, 'messages');
             }
         }
@@ -104,7 +106,7 @@ class TranslationHelper
         // TODO: If no locale is provided, use the current locale
         // Hint: Use the null coalescing operator (??)
 
-        $locale = null ?? $this->currentLocale;
+        $locale = $this->currentLocale ?? null;
 
         // TODO: Use the translator's trans() method to translate the key
         // Parameters: key, parameters, domain ('messages'), locale
@@ -125,13 +127,14 @@ class TranslationHelper
         // If not available, throw an InvalidArgumentException with a descriptive message
         $availableLocales = $this->availableLocales;
 
-        if (!empty($availableLocales)) {
+        if (empty($availableLocales)) {
             throw new InvalidArgumentException("Error: Invalid arguments", 1);
         }
 
         // TODO: Update the currentLocale property with the new locale
 
         $this->currentLocale = $locale;
+
 
         // TODO: Also update the translator's locale
         // Hint: The translator has its own setLocale() method

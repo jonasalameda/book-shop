@@ -46,12 +46,11 @@ class LocaleMiddleware implements MiddlewareInterface
         // TODO: Extract the 'lang' parameter from query params
         // Hint: Use null coalescing operator (??) to default to null if not present
         $lang = $params['lang'] ?? null;
-
         // TODO: If a locale was provided and it's valid, set it in the translator
         // Hint: Check both that locale exists AND that it's available before setting
-
         if ($lang != null && $this->translator->isLocaleAvailable($lang)) {
             $request->withAttribute('locale', $lang);
+            $this->translator->setLocale($lang);
         }
 
         // TODO: Store the current locale in the request as an attribute named 'locale'
