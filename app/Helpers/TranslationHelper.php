@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+use InvalidArgumentException;
 use Symfony\Component\Translation\Loader\FileLoader;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\JsonFileLoader;
@@ -71,9 +72,13 @@ class TranslationHelper
     private function loadTranslations(): void
     {
         // TODO: Loop through each locale in availableLocales array
+        $availableLocales = $this->availableLocales;
 
-        foreach ($variable as $key => $value) {
-            # code...
+        foreach ($availableLocales as $locale => $value) {
+            $filePath = realpath("lang" . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json");
+            if (is_file($filePath)) {
+                $this->translator->addResource('json', $filePath, $locale, 'messages');
+            }
         }
 
         // TODO: For each locale, build the file path to messages.json
@@ -99,9 +104,12 @@ class TranslationHelper
         // TODO: If no locale is provided, use the current locale
         // Hint: Use the null coalescing operator (??)
 
+        $locale = null ?? $this->currentLocale;
+
         // TODO: Use the translator's trans() method to translate the key
         // Parameters: key, parameters, domain ('messages'), locale
         // Hint: Return the result
+        return $this->translator->trans($key, $parameters, 'messages', $locale);
     }
 
     /**
@@ -115,11 +123,20 @@ class TranslationHelper
         // TODO: Validate that the requested locale is available
         // Hint: Check if $locale exists in $this->availableLocales array
         // If not available, throw an InvalidArgumentException with a descriptive message
+        $availableLocales = $this->availableLocales;
+
+        if (!empty($availableLocales)) {
+            throw new InvalidArgumentException("Error: Invalid arguments", 1);
+        }
 
         // TODO: Update the currentLocale property with the new locale
 
+        $this->currentLocale = $locale;
+
         // TODO: Also update the translator's locale
         // Hint: The translator has its own setLocale() method
+
+        $this->translator->setLocale($locale);
     }
 
     /**
@@ -130,6 +147,7 @@ class TranslationHelper
     public function getLocale(): string
     {
         // TODO: Return the current locale property
+        return $this->currentLocale;
     }
 
     /**
@@ -140,6 +158,7 @@ class TranslationHelper
     public function getDefaultLocale(): string
     {
         // TODO: Return the default locale property
+        return $this->defaultLocale;
     }
 
     /**
@@ -150,6 +169,7 @@ class TranslationHelper
     public function getAvailableLocales(): array
     {
         // TODO: Return the available locales array property
+        return $this->availableLocales;
     }
 
     /**
@@ -162,5 +182,8 @@ class TranslationHelper
     {
         // TODO: Check if the given locale exists in the availableLocales array
         // Hint: Use in_array() function
+        $availableLocales = $this->availableLocales;
+
+        return in_array($locale, $availableLocales);
     }
 }
