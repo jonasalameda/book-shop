@@ -18,9 +18,9 @@
             <a class="navbar-brand" href="/book-shop/">
                 <img src="/book-shop/public/assets/imgs/tail.png" alt="Logo" class="d-inline-block align-text-top" width="35" height="35">
             </a>
-            <a class="nav-link" href="/book-shop/featured">Featured</a>
-            <a class="nav-link" href="/book-shop/catalog">Catalog</a>
-            <a class="nav-link" href="/book-shop/contact">Contact Us</a>
-            <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register">Sign In</a>
+            <a class="nav-link" href="/book-shop/featured"><?= trans('nav.featured'); ?></a>
+            <a class="nav-link" href="/book-shop/catalog"><?= trans('nav.catalog'); ?></a>
+            <a class="nav-link" href="/book-shop/contact"><?= trans('nav.contact_us'); ?></a>
+            <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register"><?= trans('nav.sign_in'); ?></a>
         </div>
     </nav>
