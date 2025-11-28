@@ -8,7 +8,7 @@ body {
         rgba(0, 0, 0, 1) 20%,
         rgba(255, 255, 255, 0) 100%
     );
-    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F10571542.png&f=1&nofb=1&ipt=fd0f9c648c6fc43f52c328ac6e6f71ef46b5454ffff79f7c82277cc9d44304bb");
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fjrpgfr.net%2Fwp-content%2Fuploads%2F2024%2F04%2F60-%25E3%2580%258ELibrary-Of-Ruina%25E3%2580%258FPS4_Switch-Promotion-Trailer-YouTube-0-18.jpeg&f=1&nofb=1&ipt=65a551f3dc467b2e7d01256ad664776b93ae4b42b5cc9abe6261032363b03ee7");
     background-repeat: round;
 }
 
@@ -51,8 +51,14 @@ p {
 }
 
 @media only screen and (max-width: 700px) {
-    .introduction {
-        background-repeat: space;
+    body {
+        background-repeat: round;
+    }
+}
+
+@media only screen and (min-width: 1620px) {
+    body {
+        background-repeat: no-repeat;
     }
 }
 

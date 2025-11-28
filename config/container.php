@@ -80,6 +80,7 @@ $definitions = [
         return new ExceptionMiddleware(
             $container->get(ResponseFactoryInterface::class),
             $container->get(JsonRenderer::class),
+            $container->get(PhpRenderer::class),  // new parameter
             null,
             (bool) $settings['display_error_details'],
         );

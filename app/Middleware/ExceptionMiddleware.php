@@ -15,6 +15,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpException;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Views\PhpRenderer;
 use Throwable;
 
 final class ExceptionMiddleware implements MiddlewareInterface
@@ -23,19 +25,21 @@ final class ExceptionMiddleware implements MiddlewareInterface
     private JsonRenderer $renderer;
     private ?LoggerInterface $logger;
     private bool $displayErrorDetails;
+    private PhpRenderer $viewRenderer;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,
         JsonRenderer $jsonRenderer,
+        PhpRenderer $viewRenderer,              // new parameter
         ?LoggerInterface $logger = null,
         bool $displayErrorDetails = false,
     ) {
         $this->responseFactory = $responseFactory;
         $this->renderer = $jsonRenderer;
+        $this->viewRenderer = $viewRenderer;    // new assignment
         $this->displayErrorDetails = $displayErrorDetails;
         $this->logger = $logger;
     }
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
@@ -92,6 +96,11 @@ final class ExceptionMiddleware implements MiddlewareInterface
     public function renderHtml(ResponseInterface $response, Throwable $exception): ResponseInterface
     {
         $response = $response->withHeader('Content-Type', 'text/html');
+
+        // Use custom 404 view for HttpNotFoundException.
+        if ($exception instanceof HttpNotFoundException) {
+            return $this->viewRenderer->render($response, 'errors/404.php');
+        }
 
         $message = sprintf(
             "\n<br><strong>Error:</strong> %s (%s)\n<br><strong>Message:</strong> %s\n<br>",
