@@ -156,7 +156,6 @@ class AuthController extends BaseController
             //       Message: "Registration failed. Please try again."
 
             // TODO: Redirect back to 'auth.register' route
-            dd($e);
             FlashMessage::error("Registration failed. Please try again.");
             return $this->redirect($request, $response, 'auth.register');
         }

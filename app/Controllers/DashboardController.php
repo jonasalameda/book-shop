@@ -20,7 +20,13 @@ class DashboardController extends BaseController
         //! to process the request: we might need to interact with the model.
         //*change, pull data/records, etc.
         //* render view or redirect th $req to another view
-        $data = [];
+        $data = [
+            'user' => [
+                'first_name' => SessionManager::get('user_name'),
+                'email' => SessionManager::get('user_email'),
+            ],
+            'has2FA' => SessionManager::get('two_factor_verified')
+        ];
 
         return $this->render($res, 'admin/dashboardView.php', $data);
     }

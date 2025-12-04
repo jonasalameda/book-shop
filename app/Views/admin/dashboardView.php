@@ -2,7 +2,7 @@
 
 use App\Helpers\ViewHelper;
 
- ViewHelper::adminHeader('Admin Dashboard') ?>
+ViewHelper::adminHeader('Admin Dashboard') ?>
 
 <div class="container" style="max-width: 800px; margin: 50px auto;">
     <h1>Dashboard</h1>
@@ -19,7 +19,6 @@ use App\Helpers\ViewHelper;
 
         <div class="security-card">
             <h4>Two-Factor Authentication (2FA)</h4>
-
             <?php if ($has2FA): ?>
                 <p class="status status-enabled">✓ 2FA is <strong>enabled</strong></p>
                 <p>Your account is protected with two-factor authentication.</p>

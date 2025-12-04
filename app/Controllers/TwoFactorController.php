@@ -42,7 +42,11 @@ class TwoFactorController extends BaseController
         if ($twoFactorModel->isEnabled($userId)) {
             FlashMessage::add('error', '2FA is already enabled.');
 
-            return $this->redirect($request, $response, 'dashboard');
+            if (SessionManager::get("user_role") == "admin") {
+                return $this->redirect($request, $response, 'dashboard.index');
+            }
+
+            return $this->redirect($request, $response, 'user.dashboard');
         }
 
         // TODO: Create a QR code provider instance
@@ -192,7 +196,11 @@ class TwoFactorController extends BaseController
         session_regenerate_id(true);
 
         // Redirect to dashboard
-        return $this->redirect($request, $response, 'dashboard');
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
@@ -223,7 +231,12 @@ class TwoFactorController extends BaseController
         $twoFactorModel->disable($userId);
 
         FlashMessage::add('success', '2FA has been disabled.');
-        return $this->redirect($request, $response, 'dashboard');
+
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
