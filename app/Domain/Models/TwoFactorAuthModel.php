@@ -39,7 +39,7 @@ class TwoFactorAuthModel extends BaseModel
         // HINT: Use $this->execute() for INSERT
         // Fields: user_id, secret, enabled (default false)
         // Return $this->lastInsertId()
-        $sql = 'INSERT INTO `two_factor_auth` VALUES(NULL, ?, ?)';
+        $sql = 'INSERT INTO `two_factor_auth`(id, user_id, secret) VALUES(NULL, ?, ?)';
 
         $this->execute($sql, [$userId, $secret]);
 
@@ -56,11 +56,11 @@ class TwoFactorAuthModel extends BaseModel
     {
         // TODO: Update the record to set enabled = true and enabled_at = NOW()
         // HINT: Use $this->execute() and check rowCount() > 0
-        $sql = 'UPDATE `two_factor_auth SET `enabled`=?, `enabled_at`=NOW() WHERE user_id = ?';
+        $sql = 'UPDATE `two_factor_auth` SET `enabled`=?, `enabled_at`=NOW() WHERE user_id = ?';
 
         $rowCount = $this->execute($sql, [true, $userId]);
 
-        return $rowCount > 0 ? true : false; // Replace with your implementation
+        return $rowCount > 0; // Replace with your implementation
     }
 
     /**

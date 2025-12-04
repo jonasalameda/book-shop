@@ -66,7 +66,7 @@ class UserModel extends BaseModel
         if (!$user) {
             return null;
         }
-        
+
         return $user; // * array|null <-> array|false
     }
 

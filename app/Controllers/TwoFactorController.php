@@ -34,9 +34,8 @@ class TwoFactorController extends BaseController
      */
     public function showSetup(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $userId = $user['id'];
-        $userEmail = $user['email'];
+        $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
 
         // Check if user already has 2FA enabled
         $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
@@ -79,9 +78,8 @@ class TwoFactorController extends BaseController
      */
     public function verifyAndEnable(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $userId = $user['id'];
-        $userEmail = $user['email'];
+        $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
         $data = $request->getParsedBody();
         $code = $data['code'] ?? '';
 
@@ -128,7 +126,12 @@ class TwoFactorController extends BaseController
         SessionManager::remove('2fa_setup_secret');
 
         FlashMessage::add('success', '2FA has been enabled successfully!');
-        return $this->redirect($request, $response, 'dashboard');
+
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
@@ -187,8 +190,6 @@ class TwoFactorController extends BaseController
 
         // Regenerate session ID for security
         session_regenerate_id(true);
-        SessionManager::clear();
-        SessionManager::start();
 
         // Redirect to dashboard
         return $this->redirect($request, $response, 'dashboard');
@@ -200,7 +201,7 @@ class TwoFactorController extends BaseController
     public function disable(Request $request, Response $response): Response
     {
         $user = $request->getAttribute('user');
-        $userId = $user['id'];
+        $userId = SessionManager::get('user_id');
         $data = $request->getParsedBody();
         $password = $data['password'] ?? '';
 
