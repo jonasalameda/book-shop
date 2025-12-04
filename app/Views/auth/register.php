@@ -13,11 +13,11 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
+                <div class="card register-card">
+                    <div class="card-header register-header">
                         <h3 class="text-center">Create Account</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body register-body">
                         <?= App\Helpers\FlashMessage::render() ?>
 
                         <form method="POST" action="register">

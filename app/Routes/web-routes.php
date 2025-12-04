@@ -13,8 +13,10 @@ use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
 use App\Controllers\UploadController;
 use App\Controllers\AuthController;
+use App\Controllers\TwoFactorController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\AdminAuthMiddleware;
+use App\Middleware\TwoFactorMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -67,15 +69,45 @@ return static function (Slim\App $app): void {
 
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
-    $app->get('/dashboard', [AuthController::class, 'dashboard'])
-        ->setName('user.dashboard')
-        // checks if user is logged in
-        ->add(AuthMiddleware::class);
-
+$app->get('/dashboard', [AuthController::class, 'dashboard'])
+    ->setName('dashboard')
+    ->add(TwoFactorMiddleware::class)  // Add this line
+    ->add(AuthMiddleware::class);
+    
     $app->get('/products', [ProductsController::class, 'userIndex']);
 
     $app->get('/api/products/search', [ProductsController::class, 'search'])
         ->setName('api.products.search');
+
+    $app->get('/2fa/setup', [TwoFactorController::class, 'showSetup'])
+        ->setName('2fa.setup')
+        ->add(AuthMiddleware::class);
+
+    $app->post('/2fa/verify-and-enable', [TwoFactorController::class, 'verifyAndEnable'])
+        ->setName('2fa.enable')
+        ->add(AuthMiddleware::class);
+
+    // 2FA Verification during login
+    $app->get('/2fa/verify', [TwoFactorController::class, 'showVerify'])
+        ->setName('2fa.verify')
+        ->add(AuthMiddleware::class);
+
+    $app->post('/2fa/verify', [TwoFactorController::class, 'verify'])
+        ->setName('2fa.verify.post')
+        ->add(AuthMiddleware::class);
+
+    // 2FA Disable (requires full auth including 2FA)
+
+    $app->get('/2fa/disable', [TwoFactorController::class, 'showDisable'])
+        ->setName('2fa.disable.show')
+        ->add(TwoFactorMiddleware::class)
+        ->add(AuthMiddleware::class);
+
+
+    $app->post('/2fa/disable', [TwoFactorController::class, 'disable'])
+        ->setName('2fa.disable')
+        ->add(TwoFactorMiddleware::class)
+        ->add(AuthMiddleware::class);
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {

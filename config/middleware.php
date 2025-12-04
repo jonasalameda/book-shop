@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Middleware\ExceptionMiddleware;
 use App\Middleware\LocaleMiddleware;
 use App\Middleware\SessionMiddleware;
+use App\Middleware\TwoFactorMiddleware;
 use Slim\App;
 
 return function (App $app) {
@@ -18,6 +19,7 @@ return function (App $app) {
     // Add your middleware here.
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
+    $app->add(TwoFactorMiddleware::class);
     $app->add(ExceptionMiddleware::class);
     // option 2
     $app->add(SessionMiddleware::class);
