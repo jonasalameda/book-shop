@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Domain\Models\TwoFactorAuth;
+use App\Domain\Models\TwoFactorAuthModel;
 use App\Domain\Models\User;
 use App\Domain\Models\UserModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
-use RobThree\Auth\TwoFactorAuth as TFA;
+use RobThree\Auth\TwoFactorAuth;
+use Psr\Container\ContainerInterface;
 use RobThree\Auth\Providers\Qr\BaconQrCodeProvider;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -20,6 +21,14 @@ use RobThree\Auth\TwoFactorAuth as AuthTwoFactorAuth;
  */
 class TwoFactorController extends BaseController
 {
+    public function __construct(
+        ContainerInterface $container,
+        private TwoFactorAuthModel $twoFactorModel,
+        private UserModel $userModel
+    ) {
+        parent::__construct($container);
+    }
+
     /**
      * Display the 2FA setup page with QR code.
      */
@@ -30,7 +39,7 @@ class TwoFactorController extends BaseController
         $userEmail = $user['email'];
 
         // Check if user already has 2FA enabled
-        $twoFactorModel = $this->container->get(TwoFactorAuth::class);
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
         if ($twoFactorModel->isEnabled($userId)) {
             FlashMessage::add('error', '2FA is already enabled.');
 
@@ -111,7 +120,7 @@ class TwoFactorController extends BaseController
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Create a new 2FA record: $twoFactorModel->create($userId, $secret)
         // Step 3: Enable 2FA for the user: $twoFactorModel->enable($userId)
-        $twoFactorModel = $this->container->get(TwoFactorAuth::class);
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
         $twoFactorModel->create($userId, $secret);
         $twoFactorModel->enable($userId);
 
@@ -144,7 +153,7 @@ class TwoFactorController extends BaseController
         // Get the user's TOTP secret from the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Use getSecret($userId) to retrieve the secret
-        $twoFactorAuth = $this->container->get(TwoFactorAuth::class);
+        $twoFactorAuth = $this->container->get(TwoFactorAuthModel::class);
         $secret = $twoFactorAuth->getSecret($userId);; // Replace with your implementation
 
         // Create a QR code provider and TFA instance
@@ -177,6 +186,7 @@ class TwoFactorController extends BaseController
         SessionManager::remove('2fa_attempts');
 
         // Regenerate session ID for security
+        session_regenerate_id(true);
         SessionManager::clear();
         SessionManager::start();
 
@@ -208,7 +218,7 @@ class TwoFactorController extends BaseController
         // TODO: Disable 2FA in the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Call the disable($userId) method to disable 2FA
-        $twoFactorModel = $this->container->get(TwoFactorAuth::class);
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
         $twoFactorModel->disable($userId);
 
         FlashMessage::add('success', '2FA has been disabled.');
