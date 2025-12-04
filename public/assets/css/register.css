@@ -31,6 +31,28 @@ p {
     font-family: "IM Fell English", Courier, monospace;
 }
 
+.register-card {
+    /* background-color: ; */
+    background-image: url("/book-shop/public/assets/imgs/UIImage_StoryChapterFrame.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.register-header {
+    background-image: url("/book-shop/public/assets/imgs/Manual_Contents_Frame.png");
+    background-size: cover;
+    background-repeat: space;
+}
+
+.register-body {
+    /* background-color: ; */
+    background-image: url("/book-shop/public/assets/imgs/Manual_Contents_Frame.png");
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
 .btn-register {
     font-size: 1.2rem;
     font-family: "NanumSquare", Courier, monospace;
@@ -47,7 +69,7 @@ p {
     background-color: rgba(230, 192, 146, 0.87);
     border: 2px solid rgba(230, 192, 146, 0.87);
     color: whitesmoke;
-    font-weight: bolder;
+    font-weight: 900;
 }
 
 @media only screen and (max-width: 700px) {
