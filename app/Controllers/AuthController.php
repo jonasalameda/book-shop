@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Domain\Models\UserModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
+use App\Domain\Models\TwoFactorAuthModel;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -242,6 +243,19 @@ class AuthController extends BaseController
         //       Message: "Welcome back, {$user['first_name']}!"
         FlashMessage::success("Welcome back, {$user['first_name']}!");
 
+        // Check if user has 2FA enabled
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $has2FA = $twoFactorModel->isEnabled($user['id']);
+
+        // Set session data using SessionManager (same pattern as Auth Part 2)
+        SessionManager::set('user_id', $user['id']);
+        SessionManager::set('user_email', $user['email']);
+        SessionManager::set('user_first_name', $user['first_name']);
+        SessionManager::set('user_last_name', $user['last_name']);
+        SessionManager::set('is_authenticated', true);
+        SessionManager::set('requires_2fa', $has2FA);
+        SessionManager::set('two_factor_verified', !$has2FA);  // Auto-verified if no 2FA
+
         // TODO: Redirect based on role:
         //       If role is 'admin', redirect to 'admin.dashboard'
         //       If role is 'customer', redirect to 'user.dashboard'
@@ -278,11 +292,15 @@ class AuthController extends BaseController
     {
         // TODO: Create a $data array with 'title' => 'Dashboard'
 
-        $data = [
-            'title' => 'Dashboard'
-        ];
+        $userId = SessionManager::get('user_id');
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $has2FA = $twoFactorModel->isEnabled($userId);
+
 
         // TODO: Render 'user/dashboard.php' view and pass $data
-        return $this->render($response, 'user/dashboard.php', $data);
+        return $this->render($response, 'user/dashboard.php', [
+        'title' => 'Dashboard',
+        'has2FA' => $has2FA
+        ]);
     }
 }
