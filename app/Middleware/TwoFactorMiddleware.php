@@ -13,6 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use RobThree\Auth\TwoFactorAuth;
 use Slim\Routing\RouteContext;
+use App\Domain\Models\TrustedDeviceModel;
 
 /**
  * Middleware to check if user needs to verify 2FA.
@@ -26,7 +27,10 @@ use Slim\Routing\RouteContext;
  */
 class TwoFactorMiddleware implements MiddlewareInterface
 {
-    public function __construct(private TwoFactorAuthModel $twoFactorModel) {}
+    public function __construct(
+        private TwoFactorAuthModel $twoFactorModel,
+        private TrustedDeviceModel $trustedDeviceModel
+        ) {}
 
     public function process(Request $request, RequestHandler $handler): ResponseInterface
     {
@@ -46,6 +50,25 @@ class TwoFactorMiddleware implements MiddlewareInterface
         if (!$has2FAEnabled) {
             return $handler->handle($request);
         }
+
+        // Check for trusted device cookie
+        $cookies = $request->getCookieParams();
+        $deviceToken = $cookies['trusted_device'] ?? null;
+
+        if ($deviceToken) {
+            if ($this->trustedDeviceModel->isValid($deviceToken, $userId)) {
+                // Device is trusted - mark 2FA as verified
+                SessionManager::set('two_factor_verified', true);
+                $this->trustedDeviceModel->updateLastUsed($deviceToken);
+
+                return $handler->handle($request);
+            } else {
+                // Token invalid/expired - delete cookie
+                setcookie('trusted_device', '', time() - 3600, '/' . APP_ROOT_DIR_NAME);
+            }
+        }
+
+// Continue to redirect to 2FA verification...
 
         // TODO: Check if 2FA has already been verified in this session
         // HINT: Check SessionManager::get('two_factor_verified')
