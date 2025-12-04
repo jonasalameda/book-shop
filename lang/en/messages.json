@@ -11,6 +11,16 @@
         "subtitle": "\"May you find your book in this place\"",
         "start_button": "Get Started"
     },
+    "footer": {
+        "conditions": "Conditions of use",
+        "faq": "FAQ",
+        "privacy_notice": "Privacy Notice",
+        "shipping_policy": "Shipping policies",
+        "contact_us": "Contact Us",
+        "supply": "Supply to Ruina",
+        "sell": "Sell on Ruina",
+        "rights": "2025, Jonas and Nicolas. All rights reserved."
+    },
     "common": {
         "save": "Save",
         "cancel": "Cancel",

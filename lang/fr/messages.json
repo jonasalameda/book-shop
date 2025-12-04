@@ -11,6 +11,16 @@
         "subtitle": "\"Puissiez-vous trouver votre livre à cet endroit.\"",
         "start_button": "Commencer"
     },
+    "footer": {
+        "conditions": "Conditions d'utilisation",
+        "faq": "FAQ",
+        "privacy_notice": "Avis de confidentialité",
+        "shipping_policy": "Politiques d'expédition",
+        "contact_us": "Contact Us",
+        "supply": "Fournir à Ruina",
+        "sell": "Vendre sur",
+        "rights": "2025, Jonas et Nicolas. Tous droits réservés."
+    },
     "common": {
         "save": "Sauvegarder",
         "cancel": "Canceler",

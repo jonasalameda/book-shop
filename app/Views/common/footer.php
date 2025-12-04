@@ -4,7 +4,7 @@
             <div class="col-2">
                 <ul>
                     <li>
-                        <a class="footer-link" href="#"><b>Conditions of use</b></a>
+                        <a class="footer-link" href="#"><b><?= trans('footer.conditions') ?></b></a>
                     </li>
                     <li>
                         <a class="footer-link" href="#">FAQ</a>
@@ -14,8 +14,8 @@
 
             <div class="col-2">
                 <ul>
-                    <li><a class="footer-link" href="#"><b>Privacy Notice</b></a></li>
-                    <li><a class="footer-link" href="#">Shipping policies</a></li>
+                    <li><a class="footer-link" href="#"><b><?= trans('footer.privacy_notice') ?></b></a></li>
+                    <li><a class="footer-link" href="#"><?= trans('footer.shipping_policy') ?></a></li>
                 </ul>
 
             </div>
@@ -23,15 +23,15 @@
             <div class="col-2">
                 <ul>
                     <li>
-                        <a class="footer-link" href="#"><b>Contact Us</b></a>
+                        <a class="footer-link" href="#"><b><?= trans('footer.contact_us') ?></b></a>
                     </li>
 
                     <li>
-                        <a class="footer-link" href="#">Supply to Ruina</a>
+                        <a class="footer-link" href="#"><?= trans('footer.supply') ?></a>
                     </li>
 
                     <li>
-                        <a class="footer-link" href="#">Sell on Ruina</a>
+                        <a class="footer-link" href="#"><?= trans('footer.sell') ?></a>
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
 
     <div class="container-fluid">
         <div class="row text-center">
-            <p>&copy; 2025, Jonas and Nicolas. All rights reserved.</p>
+            <p>&copy; <?= trans('footer.rights') ?></p>
         </div>
     </div>
 </div>
