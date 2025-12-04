@@ -367,11 +367,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/<?= APP_ROOT_DIR_NAME?>/2fa/setup">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#graph-up"></use>
                                     </svg>
-                                    Reports
+                                    2FA
                                 </a>
                             </li>
                             <li class="nav-item">
