@@ -26,7 +26,7 @@ use Slim\Routing\RouteContext;
  */
 class TwoFactorMiddleware implements MiddlewareInterface
 {
-    public function __construct(private ModelsTwoFactorAuth $twoFactorModel) {}
+    public function __construct(private TwoFactorAuthModel $twoFactorModel) {}
 
     public function process(Request $request, RequestHandler $handler): ResponseInterface
     {
