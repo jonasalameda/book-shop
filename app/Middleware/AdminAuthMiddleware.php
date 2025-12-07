@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use App\Domain\Models\TwoFactorAuthModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -14,6 +15,11 @@ use Slim\Routing\RouteContext;
 
 class AdminAuthMiddleware implements MiddlewareInterface
 {
+    public function __construct(
+        private TwoFactorAuthModel $twoFactorModel
+    ) {
+    }
+
     /**
      * Process the request - check if user is authenticated AND is an admin.
      */

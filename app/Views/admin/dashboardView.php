@@ -1,11 +1,13 @@
 <?php
 
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
 
 ViewHelper::adminHeader('Admin Dashboard') ?>
 
 <div class="container" style="max-width: 800px; margin: 50px auto;">
     <h1>Dashboard</h1>
+    <div><?= FlashMessage::render(); ?></div>
 
     <div class="welcome-section">
         <h2>Welcome, <?= htmlspecialchars($user['first_name'] ?? 'User') ?>!</h2>

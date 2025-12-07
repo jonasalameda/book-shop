@@ -19,10 +19,14 @@ return function (App $app) {
     // Add your middleware here.
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
-    $app->add(TwoFactorMiddleware::class);
-    $app->add(ExceptionMiddleware::class);
     // option 2
     $app->add(SessionMiddleware::class);
     // Detect and set the application locale
     $app->add(LocaleMiddleware::class);
+
+    $app->add(TwoFactorMiddleware::class);
+
+    $app->add(ExceptionMiddleware::class);
+
+
 };
