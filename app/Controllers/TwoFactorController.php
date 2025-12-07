@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Domain\Models\TrustedDeviceModel;
 use App\Domain\Models\TwoFactorAuthModel;
 use App\Domain\Models\User;
 use App\Domain\Models\UserModel;
@@ -24,7 +25,8 @@ class TwoFactorController extends BaseController
     public function __construct(
         ContainerInterface $container,
         private TwoFactorAuthModel $twoFactorModel,
-        private UserModel $userModel
+        private UserModel $userModel,
+        private TrustedDeviceModel $trustedDeviceModel
     ) {
         parent::__construct($container);
     }
@@ -195,6 +197,49 @@ class TwoFactorController extends BaseController
         // Regenerate session ID for security
         session_regenerate_id(true);
 
+        // Check if user wants to trust this device
+        $trustDevice = $data['trust_device'] ?? false;
+
+        if ($trustDevice) {
+            // TODO: Generate a unique device token (64-character hex string)
+            // HINT: Use bin2hex(random_bytes(32)) to generate a secure random token
+            $deviceToken = bin2hex(random_bytes(64)); // Replace with your implementation
+
+            // TODO: Calculate the expiration date (30 days from now)
+            // HINT: Use DateTime class: (new \DateTime())->modify('+30 days')->format('Y-m-d H:i:s')
+            $expiresAt = (new \DateTime())->modify('+30 days')->format('Y-m-d H:i:s'); // Replace with your implementation
+
+            // TODO: Build the device information array with the following keys:
+            // - 'device_name': Use $this->getDeviceName($request) helper method
+            // - 'user_agent': Use $request->getHeaderLine('User-Agent')
+            // - 'ip_address': Use $this->getClientIp($request) helper method
+            // - 'expires_at': Use the expiration date calculated above
+            $deviceInfo = [
+                'device_name' => $this->getDeviceName($request),
+                'user_agent' => $request->getHeaderLine('User-Agent'),
+                'ip_address' => $this->getClientIp($request),
+                'expires_at' => $expiresAt
+            ]; // Replace with your implementation
+
+            // TODO: Save the trusted device to the database
+            // HINT: Call $this->trustedDeviceModel->create($userId, $deviceToken, $deviceInfo)
+            $this->trustedDeviceModel->create($userId, $deviceToken, $deviceInfo);
+            // TODO: Set a secure cookie to remember this device
+            // HINT: Use setcookie() with an options array containing:
+            // - 'expires': strtotime('+30 days')
+            // - 'path': '/' . APP_ROOT_DIR_NAME
+            // - 'secure': false (set to true in production with HTTPS)
+            // - 'httponly': true (prevents JavaScript access)
+            // - 'samesite': 'Lax' (CSRF protection)
+        }
+        setcookie(bin2hex($deviceToken), "", [
+            'expires' => strtotime('+30 days'),
+            'path' => '/' . APP_ROOT_DIR_NAME,
+            'secure' => false,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+
         // Redirect to dashboard
         if (SessionManager::get("user_role") == "admin") {
             return $this->redirect($request, $response, 'dashboard.index');
@@ -247,5 +292,30 @@ class TwoFactorController extends BaseController
         return $this->render($response, 'auth/2fa-disable.php', [
             'title' => 'Disable 2FA'
         ]);
+    }
+
+    private function getDeviceName(Request $request): string
+    {
+        $userAgent = $request->getHeaderLine('User-Agent');
+
+        if (stripos($userAgent, 'Windows') !== false) return 'Windows PC';
+        if (stripos($userAgent, 'Mac') !== false) return 'Mac';
+        if (stripos($userAgent, 'iPhone') !== false) return 'iPhone';
+        if (stripos($userAgent, 'Android') !== false) return 'Android';
+        if (stripos($userAgent, 'Linux') !== false) return 'Linux PC';
+
+        return 'Unknown Device';
+    }
+
+    private function getClientIp(Request $request): string
+    {
+        $serverParams = $request->getServerParams();
+
+        if (!empty($serverParams['HTTP_X_FORWARDED_FOR'])) {
+            $ipList = explode(',', $serverParams['HTTP_X_FORWARDED_FOR']);
+            return trim($ipList[0]);
+        }
+
+        return $serverParams['REMOTE_ADDR'] ?? '0.0.0.0';
     }
 }

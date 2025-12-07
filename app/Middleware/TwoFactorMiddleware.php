@@ -14,6 +14,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use RobThree\Auth\TwoFactorAuth;
 use Slim\Routing\RouteContext;
 use App\Domain\Models\TrustedDeviceModel;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Message\ResponseFactoryInterface;
 
 /**
  * Middleware to check if user needs to verify 2FA.
@@ -30,7 +32,7 @@ class TwoFactorMiddleware implements MiddlewareInterface
     public function __construct(
         private TwoFactorAuthModel $twoFactorModel,
         private TrustedDeviceModel $trustedDeviceModel
-        ) {}
+    ) {}
 
     public function process(Request $request, RequestHandler $handler): ResponseInterface
     {
@@ -68,7 +70,7 @@ class TwoFactorMiddleware implements MiddlewareInterface
             }
         }
 
-// Continue to redirect to 2FA verification...
+        // Continue to redirect to 2FA verification...
 
         // TODO: Check if 2FA has already been verified in this session
         // HINT: Check SessionManager::get('two_factor_verified')
@@ -83,9 +85,8 @@ class TwoFactorMiddleware implements MiddlewareInterface
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $verifyUrl = $routeParser->urlFor('2fa.verify');
 
-        $response = new \Nyholm\Psr7\Response();
-        return $response
-            ->withStatus(302)
-            ->withHeader('Location', $verifyUrl);
+        $factory = new Psr17Factory();
+        $response =  $factory->createResponse(302);
+        return $response->withHeader('Location', $verifyUrl)->withStatus(302);
     }
 }

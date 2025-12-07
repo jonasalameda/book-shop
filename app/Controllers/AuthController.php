@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthController extends BaseController
 {
-    public function __construct(Container $container, private UserModel $userModel)
+    public function __construct(Container $container, private UserModel $userModel, private TwoFactorAuthModel $twoFactorAuth)
     {
         parent::__construct($container);
     }
@@ -246,6 +246,10 @@ class AuthController extends BaseController
         SessionManager::set('requires_2fa', $has2FA);
         SessionManager::set('two_factor_verified', !$has2FA);  // Auto-verified if no 2FA
 
+        if ($this->twoFactorAuth->isEnabled($user['id']) == true) {
+            return $this->redirect($request, $response, '2fa.setup');
+        }
+
         // Auto-verified if no 2FA
         // TODO: Display success message using FlashMessage::success()
         //       Message: "Welcome back, {$user['first_name']}!"
@@ -259,7 +263,7 @@ class AuthController extends BaseController
         if ($user['role'] === 'admin') {
             return $this->redirect($request, $response, 'dashboard.index');
         } else {
-            return $this->redirect($request, $response, 'user.dashboard');
+            return $this->redirect($request, $response, 'dashboard');
         }
     }
 
