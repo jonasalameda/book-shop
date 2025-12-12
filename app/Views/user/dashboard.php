@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">E-Commerce</a>
-            <div class="navbar-nav ms-auto">
-                <span class="navbar-text me-3">
-                    Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? 'Guest') ?>!
-                </span>
-                <a class="btn btn-outline-light btn-sm" href="logout">Logout</a>
-            </div>
+<?php
+use App\Helpers\ViewHelper;
+
+
+ViewHelper::loadHeader($data['title']);
+?>
+
+    <div class="container mt-5">
+        <h1>Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? 'Guest') ?>!</h1>
+
+        <div class="mb-4">
+            <?= App\Helpers\FlashMessage::render() ?>
         </div>
-    </nav>
 
     <div class="container mt-5">
         <h1>User Dashboard</h1>
@@ -48,6 +41,7 @@
                             <a href="#" class="btn btn-primary">Browse Products</a>
                             <a href="#" class="btn btn-secondary">My Orders</a>
                             <a href="#" class="btn btn-info">Update Profile</a>
+                            <a class="btn btn-danger btn-sm" href="logout">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -55,6 +49,11 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <br>
+    <br>
+
+<?php
+
+ViewHelper::loadJsScripts();
+ViewHelper::loadFooter();
+?>
