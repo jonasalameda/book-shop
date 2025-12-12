@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 20, 2025 at 03:40 PM
+-- Generation Time: Dec 07, 2025 at 04:22 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -44,6 +44,20 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES
 (3, 'Horror', 'Genre of art and media that aims to disturb, frighten, or scare an audience by eliciting feelings of fear, dread, or intense aversion.', '2025-11-13 14:20:06'),
 (4, 'Autobiography', 'An account of someone\'s life written by that person', '2025-11-13 14:20:06'),
 (5, 'Fiction', 'Creative, imaginary work, such as novels, short stories, or films, that is not based on facts.', '2025-11-13 14:20:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE `login_attempts` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `attempted_at` timestamp NULL DEFAULT current_timestamp(),
+  `successful` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -124,6 +138,47 @@ INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `is_primary`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trusted_devices`
+--
+
+CREATE TABLE `trusted_devices` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `device_token` varchar(255) NOT NULL,
+  `device_name` varchar(100) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT current_timestamp(),
+  `expires_at` timestamp NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `two_factor_auth`
+--
+
+CREATE TABLE `two_factor_auth` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `secret` varchar(255) NOT NULL,
+  `enabled` tinyint(1) DEFAULT 0,
+  `enabled_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `two_factor_auth`
+--
+
+INSERT INTO `two_factor_auth` (`id`, `user_id`, `secret`, `enabled`, `enabled_at`, `created_at`, `updated_at`) VALUES
+(8, 4, 'OMVTIKMLBE7E22PFWDIRKNH7N7DDLR2S', 1, '2025-12-04 15:42:38', '2025-12-04 15:42:38', '2025-12-04 15:42:38');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -139,55 +194,15 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
--- Two-factor authentication table
-CREATE TABLE IF NOT EXISTS two_factor_auth (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    secret VARCHAR(255) NOT NULL,
-    enabled BOOLEAN DEFAULT FALSE,
-    enabled_at TIMESTAMP NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_user (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Trusted devices table for "Remember this device" feature
-CREATE TABLE IF NOT EXISTS trusted_devices (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    device_token VARCHAR(255) UNIQUE NOT NULL,
-    device_name VARCHAR(100),
-    user_agent VARCHAR(255),
-    ip_address VARCHAR(45),
-    last_used_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_device_token (device_token),
-    INDEX idx_user_id (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Login attempts table for rate limiting (security)
-CREATE TABLE IF NOT EXISTS login_attempts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL,
-    ip_address VARCHAR(45) NOT NULL,
-    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    successful BOOLEAN DEFAULT FALSE,
-    INDEX idx_email_ip (email, ip_address),
-    INDEX idx_attempted_at (attempted_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password_hash`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'testing', 'testing', 'testing', 'testing@gmail.com', '$2y$12$LNCeVCp93L/PBH9Y.wQE..9QQ5s8K.Q.URfswbiDzkbmO12yqWrVy', 'admin', '2025-11-20 09:48:05', '2025-11-20 10:30:52'),
-(2, 'Prototype', '1', 'realperson123', 'prototype@gmail.com', '$2y$12$b5/ftWDVzePOiU0.VkQrtu5ntnL8e98ufEco5OM9biYPH5WIAAQ2u', 'admin', '2025-11-20 10:01:03', '2025-11-20 10:27:44');
+(1, 'testing', 'testing', 'testing', 'testing@gmail.com', '$2y$12$LNCeVCp93L/PBH9Y.wQE..9QQ5s8K.Q.URfswbiDzkbmO12yqWrVy', 'customer', '2025-11-20 09:48:05', '2025-11-20 11:01:37'),
+(2, 'Prototype', '1', 'realperson123', 'prototype@gmail.com', '$2y$12$b5/ftWDVzePOiU0.VkQrtu5ntnL8e98ufEco5OM9biYPH5WIAAQ2u', 'admin', '2025-11-20 10:01:03', '2025-11-20 10:27:44'),
+(3, 'prototype', '2', 'prototype', 'proto@gmail.com', '$2y$12$Lmt6956Ple27i6BG.a/FvuH9LHusqgdT.RYXCONlwGvOgANEWwJA.', 'customer', '2025-11-20 11:03:28', '2025-11-20 11:03:28'),
+(4, 'test', 'test', 'testing123', 'test@gmail.com', '$2y$12$TQli5yjEIwdlxVjwj02B.uCroCnhoS4/zQNSA4SOY4NmbEMh3/hLG', 'admin', '2025-12-04 09:55:01', '2025-12-04 09:55:20');
 
 --
 -- Indexes for dumped tables
@@ -199,6 +214,14 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_email_ip` (`email`,`ip_address`),
+  ADD KEY `idx_attempted_at` (`attempted_at`);
 
 --
 -- Indexes for table `orders`
@@ -230,6 +253,22 @@ ALTER TABLE `product_images`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `trusted_devices`
+--
+ALTER TABLE `trusted_devices`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `device_token` (`device_token`),
+  ADD KEY `idx_device_token` (`device_token`),
+  ADD KEY `idx_user_id` (`user_id`);
+
+--
+-- Indexes for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -246,6 +285,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -272,10 +317,22 @@ ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `trusted_devices`
+--
+ALTER TABLE `trusted_devices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -305,6 +362,18 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `trusted_devices`
+--
+ALTER TABLE `trusted_devices`
+  ADD CONSTRAINT `trusted_devices_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  ADD CONSTRAINT `two_factor_auth_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

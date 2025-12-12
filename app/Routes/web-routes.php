@@ -74,8 +74,8 @@ return static function (Slim\App $app): void {
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
 $app->get('/dashboard', [AuthController::class, 'dashboard'])
-    ->setName('dashboard')
-    ->add(TwoFactorMiddleware::class)  // Add this line
+    ->setName('user.dashboard')
+    // ->add(TwoFactorMiddleware::class)  // Add this line
     ->add(AuthMiddleware::class);
 
     $app->get('/products', [ProductsController::class, 'userIndex']);
