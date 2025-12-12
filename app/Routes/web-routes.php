@@ -51,9 +51,9 @@ return static function (Slim\App $app): void {
         // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');
         $group->post('/products/upload', [ProductsController::class, 'add'])->setName('add.process');
     })
-    // ->add(TwoFactorMiddleware::class)   // Step 3: Check 2FA verified
-    ->add(AdminAuthMiddleware::class);   // Step 2: Check user is admin
-    // ->add(AuthMiddleware::class);       // Step 1: Check user is logged in
+    ->add(TwoFactorMiddleware::class)   // Step 3: Check 2FA verified
+    ->add(AdminAuthMiddleware::class)   // Step 2: Check user is admin
+    ->add(AuthMiddleware::class);       // Step 1: Check user is logged in
 
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]

@@ -73,7 +73,7 @@ class TwoFactorAuthModel extends BaseModel
     {
         // TODO: Update the record to set enabled = false
         // HINT: Use $this->execute() and check rowCount() > 0
-        $sql = 'UPDATE `two_factor_auth SET `enabled`=?, WHERE user_id = ?';
+        $sql = 'UPDATE `two_factor_auth` SET enabled=? WHERE user_id = ?';
 
         $rowCount = $this->execute($sql, [false, $userId]);
 

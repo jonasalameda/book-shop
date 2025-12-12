@@ -253,14 +253,14 @@ class TwoFactorController extends BaseController
      */
     public function disable(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
         $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
         $data = $request->getParsedBody();
         $password = $data['password'] ?? '';
 
         // Verify password before disabling 2FA
         $userModel = $this->container->get(UserModel::class);
-        $validUser = $userModel->verifyCredentials($user['email'], $password);
+        $validUser = $userModel->verifyCredentials($userEmail, $password);
 
         if (!$validUser) {
             return $this->render($response, 'auth/2fa-disable.php', [
