@@ -6,7 +6,10 @@ use App\Helpers\ViewHelper;
 ViewHelper::adminHeader('Admin Dashboard') ?>
 
 <div class="container" style="max-width: 800px; margin: 50px auto;">
-    <h1>Dashboard</h1>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+    </div>
     <div><?= FlashMessage::render(); ?></div>
 
     <div class="welcome-section">
@@ -45,89 +48,5 @@ ViewHelper::adminHeader('Admin Dashboard') ?>
         </form>
     </div>
 </div>
-
-<style>
-    .welcome-section {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .security-section {
-        margin: 20px 0;
-    }
-
-    .security-card {
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 8px;
-        background-color: #fff;
-    }
-
-    .status {
-        padding: 10px;
-        border-radius: 4px;
-        margin: 10px 0;
-    }
-
-    .status-enabled {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-
-    .status-disabled {
-        background-color: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeaa7;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        color: white;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        color: white;
-    }
-
-    .btn-secondary:hover {
-        background-color: #5a6268;
-    }
-
-    .actions {
-        margin-top: 30px;
-    }
-
-    hr {
-        margin: 30px 0;
-        border: none;
-        border-top: 1px solid #ddd;
-    }
-</style>
 
 <?php ViewHelper::adminFooter() ?>
