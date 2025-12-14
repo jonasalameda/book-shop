@@ -42,7 +42,7 @@
     "login": {
         "login": "Connectez-vous",
         "email_username": "Email ou Nom d'utilisateur",
-        "email_placeholder": "Saisissez votre adresse e-mail ou votre nom d'utilisateur",
+        "email_placeholder": "Saisissez votre e-mail ou votre nom d'utilisateur",
         "password": "Mot de passe",
         "password_placeholder": "Saisissez votre mot de passe.",
         "register_msg": "Vous n'avez pas de compte?",

@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/book-shop/public/assets/css/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<?php
+
+use App\Helpers\ViewHelper;
+//TODO: set the page title dynamically based on the view being rendered in the controller.
+$page_title = "login";
+ViewHelper::loadHeader($page_title);
+?>
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
