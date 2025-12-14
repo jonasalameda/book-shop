@@ -16,7 +16,7 @@
         "faq": "FAQ",
         "privacy_notice": "Avis de confidentialité",
         "shipping_policy": "Politiques d'expédition",
-        "contact_us": "Contact Us",
+        "contact_us": "Contactez-nous",
         "supply": "Fournir à Ruina",
         "sell": "Vendre sur",
         "rights": "2025, Jonas et Nicolas. Tous droits réservés."
@@ -27,6 +27,7 @@
         "delete": "Supprimer"
     },
     "register": {
+        "create_account": "Créer un compte",
         "first_name": "Prénom",
         "last_name": "Nom de famille",
         "username": "Nom d'utilisateur",
@@ -35,7 +36,9 @@
         "password_condition": "Le mot de passe doit comporter au moins 8 caractères et contenir au moins un chiffre.",
         "confirm_password": "Confirmez le mot de passe",
         "register_button": "S'inscrire",
-        "login_msg": "Vous avez déjà un compte ? Connectez-vous ici."
+        "login_msg": "Vous avez déjà un compte ?",
+        "login_link": "Connectez-vous ici."
+
     },
     "errors": {
         "404": {

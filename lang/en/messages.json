@@ -27,6 +27,7 @@
         "delete": "Delete"
     },
     "register": {
+        "create_account": "Create Account",
         "first_name": "First Name",
         "last_name": "Last Name",
         "username": "Username",
@@ -35,7 +36,8 @@
         "password_condition": "Password must be at least 8 characters long and contain at least one number.",
         "confirm_password": "Confirm Password",
         "register_button": "Register",
-        "login_msg": "Already have an account? Login here"
+        "login_msg": "Already have an account?",
+        "login_link": "Login here"
     },
     "errors": {
         "404": {

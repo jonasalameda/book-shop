@@ -15,54 +15,54 @@
             <div class="col-md-6">
                 <div class="card register-card">
                     <div class="card-header register-header">
-                        <h3 class="text-center">Create Account</h3>
+                        <h3 class="text-center"><?= hs(trans('register.create_account')); ?></h3>
                     </div>
                     <div class="card-body register-body">
                         <?= App\Helpers\FlashMessage::render() ?>
 
                         <form method="POST" action="register">
                             <div class="mb-3">
-                                <label for="first_name" class="form-label">First Name</label>
+                                <label for="first_name" class="form-label"><?= hs(trans('register.first_name')); ?></label>
                                 <input type="text" class="form-control" id="first_name" name="first_name" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="last_name" class="form-label">Last Name</label>
+                                <label for="last_name" class="form-label"><?= hs(trans('register.last_name')); ?></label>
                                 <input type="text" class="form-control" id="last_name" name="last_name" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
+                                <label for="username" class="form-label"><?= hs(trans('register.username')); ?></label>
                                 <input type="text" class="form-control" id="username" name="username" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
+                                <label for="email" class="form-label"><?= hs(trans('register.email')); ?></label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label"><?= hs(trans('register.password')); ?></label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                                 <div class="form-text">
-                                    Password must be at least 8 characters long and contain at least one number.
+                                    <?= hs(trans('register.password_condition')); ?>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <label for="confirm_password" class="form-label"><?= hs(trans('register.confirm_password')); ?></label>
                                 <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                             </div>
 
                             <input type="hidden" name="role" value="customer">
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn-register ">Register</button>
+                                <button type="submit" class="btn-register "><?= hs(trans('register.register_button')); ?></button>
                             </div>
                         </form>
 
                         <div class="mt-3 text-center">
-                            <p>Already have an account? <a href="login">Login here</a></p>
+                            <p><?= hs(trans('register.login_msg')); ?> <a href="login"><?= hs(trans('register.login_link')); ?></a></p>
                         </div>
                     </div>
                 </div>
