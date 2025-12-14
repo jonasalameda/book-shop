@@ -38,7 +38,15 @@
         "register_button": "S'inscrire",
         "login_msg": "Vous avez déjà un compte ?",
         "login_link": "Connectez-vous ici."
-
+    },
+    "login": {
+        "login": "Connectez-vous",
+        "email_username": "Email ou Nom d'utilisateur",
+        "email_placeholder": "Saisissez votre adresse e-mail ou votre nom d'utilisateur",
+        "password": "Mot de passe",
+        "password_placeholder": "Saisissez votre mot de passe.",
+        "register_msg": "Vous n'avez pas de compte?",
+        "register_link": "Inscrivez-vous ici"
     },
     "errors": {
         "404": {

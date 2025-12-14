@@ -39,6 +39,15 @@
         "login_msg": "Already have an account?",
         "login_link": "Login here"
     },
+    "login": {
+        "login": "Login",
+        "email_username": "Email or Username",
+        "email_placeholder": "Enter your email or username",
+        "password": "Password",
+        "password_placeholder": "Enter your password",
+        "register_msg": "Don't have an account?",
+        "register_link": "Register here"
+    },
     "errors": {
         "404": {
             "title": "404 - Page Not Found",

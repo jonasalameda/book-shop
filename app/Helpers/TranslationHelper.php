@@ -106,7 +106,7 @@ class TranslationHelper
         // TODO: If no locale is provided, use the current locale
         // Hint: Use the null coalescing operator (??)
 
-        $locale = $this->currentLocale ?? null;
+        $locale = SessionManager::get('locale') ?? $this->currentLocale ?? null;
 
         // TODO: Use the translator's trans() method to translate the key
         // Parameters: key, parameters, domain ('messages'), locale

@@ -9,6 +9,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use App\Helpers\SessionManager;
+
 
 /**
  * Locale Middleware
@@ -48,14 +50,23 @@ class LocaleMiddleware implements MiddlewareInterface
         $lang = $params['lang'] ?? null;
         // TODO: If a locale was provided and it's valid, set it in the translator
         // Hint: Check both that locale exists AND that it's available before setting
-        if ($lang != null && $this->translator->isLocaleAvailable($lang)) {
-            $request->withAttribute('locale', $lang);
-            $this->translator->setLocale($lang);
-        }
+        if ($lang !== null) {
+            if ($this->translator->isLocaleAvailable($lang)) {
+                SessionManager::set('locale', $lang);
+                $this->translator->setLocale($lang);
+            }
+        } elseif (SessionManager::has('locale')) {
+            $sessionLang = SessionManager::get('locale');
+            if ($this->translator->isLocaleAvailable($sessionLang)) {
+                $lang = $sessionLang;
+                $this->translator->setLocale($lang);
+            }
+    }
 
         // TODO: Store the current locale in the request as an attribute named 'locale'
         // Hint: Use $request->withAttribute() to add the attribute
         // Remember: withAttribute() returns a new request object, so reassign it
+        $request = $request->withAttribute('locale', $lang);
 
         // TODO: Pass the request to the next middleware/handler and return the response
         return $handler->handle($request);
