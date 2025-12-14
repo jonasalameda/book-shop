@@ -48,6 +48,20 @@
         "register_msg": "Vous n'avez pas de compte?",
         "register_link": "Inscrivez-vous ici"
     },
+    "dashboard": {
+        "welcome": "Bienvenue,",
+        "welcome_flash": "Bon retour,",
+        "title": "Tableau de bord utilisateur",
+        "profile": "Mon profil",
+        "name": "Nom :",
+        "email": "Courriel :",
+        "role": "Rôle :",
+        "actions": "Actions rapides",
+        "products_btn": "Parcourir les produits",
+        "orders_btn": "Mes commandes",
+        "update_btn": "Mettre à jour le profil",
+        "logout_btn": "Se déconnecter"
+    },
     "errors": {
         "404": {
             "title": "404 - Page introuvable",

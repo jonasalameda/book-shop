@@ -20,9 +20,10 @@ return function (App $app) {
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
     // option 2
-    $app->add(SessionMiddleware::class);
     // Detect and set the application locale
     $app->add(LocaleMiddleware::class);
+
+    $app->add(SessionMiddleware::class);
 
     $app->add(TwoFactorMiddleware::class);
 

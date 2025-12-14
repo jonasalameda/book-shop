@@ -48,6 +48,20 @@
         "register_msg": "Don't have an account?",
         "register_link": "Register here"
     },
+    "dashboard": {
+        "welcome": "Welcome,",
+        "welcome_flash": "Welcome back,",
+        "title": "User Dashboard",
+        "profile": "My Profile",
+        "name": "Name:",
+        "email": "Email:",
+        "role": "Role:",
+        "actions": "Quick Actions",
+        "products_btn": "Browse Products",
+        "orders_btn": "My Orders",
+        "update_btn": "Update Profile",
+        "logout_btn": "Logout"
+    },
     "errors": {
         "404": {
             "title": "404 - Page Not Found",

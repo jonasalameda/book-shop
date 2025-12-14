@@ -41,18 +41,18 @@ class TranslationHelper
         // Note: currentLocale should start as the same value as defaultLocale
         $this->langPath = $langPath;
         $this->defaultLocale = $defaultLocale;
-        $currentLocale = $defaultLocale;
+        $this->currentLocale = $defaultLocale;
         $this->availableLocales = $availableLocales;
 
         // TODO: Create a new Translator instance and store it in $this->translator
         // Hint: Pass the current locale to the Translator constructor
 
-        $this->translator = new Translator($currentLocale);
+        $this->translator = new Translator($this->currentLocale);
 
 
         // TODO: Configure the translator to fall back to the default locale if a translation is missing
         // Hint: Use the setFallbackLocales() method with an array containing the default locale
-        $this->translator->setFallbackLocales([$defaultLocale]);
+        $this->translator->setFallbackLocales([$this->defaultLocale]);
 
 
         // TODO: Register the JSON file loader with the translator
@@ -78,7 +78,7 @@ class TranslationHelper
             // $filePath = realpath("lang" . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json");
             $filePath = $this->langPath .   DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . "messages.json";
             // dd($filePath);
-            if ($filePath) {
+            if (file_exists($filePath)) {
                 $this->translator->addResource('json', $filePath, $locale, 'messages');
             }
         }
@@ -106,7 +106,7 @@ class TranslationHelper
         // TODO: If no locale is provided, use the current locale
         // Hint: Use the null coalescing operator (??)
 
-        $locale = SessionManager::get('locale') ?? $this->currentLocale ?? null;
+        $locale = $locale ?? SessionManager::get('locale') ?? $this->currentLocale;
 
         // TODO: Use the translator's trans() method to translate the key
         // Parameters: key, parameters, domain ('messages'), locale
