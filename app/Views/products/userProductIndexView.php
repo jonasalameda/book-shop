@@ -21,12 +21,22 @@ ViewHelper::loadHeader($page_title);
                 <span class="input-group-text">
                     <i class="bi bi-search"></i> <!-- Bootstrap Icons -->
                 </span>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="searchInput"
-                    placeholder="Search products by name or description..."
-                    aria-label="Search products">
+                <form class="search-bar">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="searchInput"
+                        placeholder="Search products by name or description..."
+                        aria-label="Search products">
+                </form>
+            </div>
+            <div class="col-md-1">
+                <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div id="searchResults" class="row">
+                <!-- Results will be dynamically inserted here by JavaScript -->
             </div>
         </div>
         <div class="col-md-3">
@@ -69,7 +79,7 @@ ViewHelper::loadHeader($page_title);
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer">
-                        <a href="/products/<?= $product['id'] ?>" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="<?= APP_BASE_URL ?>/products/<?= $product['id'] ?>" class="btn btn-primary btn-sm">View Details</a>
                     </div>
                 </div>
             </div>

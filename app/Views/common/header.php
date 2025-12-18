@@ -19,9 +19,16 @@
                 <img src="/book-shop/public/assets/imgs/tail.png" alt="Logo" class="d-inline-block align-text-top" width="35" height="35">
             </a>
             <a class="nav-link" href="<?= APP_BASE_URL ?>/products"><?= trans('nav.catalog'); ?></a>
-            <a class="nav-link" href="/book-shop/featured"><?= trans('nav.featured'); ?></a>
+            <a class="nav-link" href="<?= APP_BASE_URL ?>/dashboard"><?= trans('nav.dashboard'); ?></a>
             <a class="nav-link" href="/book-shop/contact"><?= trans('nav.contact_us'); ?></a>
-            <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register"><?= trans('nav.sign_in'); ?></a>
+            <?php
+
+            use App\Helpers\SessionManager;
+
+
+            if (!SessionManager::get('user_id')): ?>
+                <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register"><?= trans('nav.sign_in'); ?></a>
+            <?php endif; ?>
             <div class="language-switcher">
                 <?php
                 // Get current locale from global translator
