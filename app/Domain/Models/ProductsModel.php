@@ -117,4 +117,9 @@ class ProductsModel extends BaseModel
         // TODO: Return results using $this->selectAll($sql, $params)
         return $this->selectAll($sql, $params);
     }
+
+    public function getProductImage(int $productId)
+    {
+        return $this->selectAll("SELECT * FROM `product_images` WHERE product_id = ?", [$productId]);
+    }
 }

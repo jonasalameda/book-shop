@@ -1,0 +1,18 @@
+.book-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "book-image book-description"
+        "book-image book-actions";
+}
+.book-image {
+    grid-area: book-image;
+}
+.book-description {
+    grid-area: book-description;
+}
+.book-actions {
+    grid-area: book-actions;
+}

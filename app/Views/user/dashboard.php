@@ -39,7 +39,7 @@ ViewHelper::loadHeader($data['title']);
                     <div class="card-body">
                         <h5 class="card-title"><?= trans('dashboard.actions') ?></h5>
                         <div class="d-grid gap-2">
-                            <a href="<?= APP_BASE_DIR_PATH ?>/products" class="btn btn-primary"><?= trans('dashboard.products_btn') ?></a>
+                            <a href="<?= APP_BASE_URL ?>/products" class="btn btn-primary"><?= trans('dashboard.products_btn') ?></a>
                             <a href="#" class="btn btn-secondary"><?= trans('dashboard.orders_btn') ?></a>
                             <a href="#" class="btn btn-info"><?= trans('dashboard.update_btn') ?></a>
                             <a class="btn btn-danger btn-sm" href="logout"><?= trans('dashboard.logout_btn') ?></a>

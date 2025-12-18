@@ -177,6 +177,21 @@ class ProductsController extends BaseController
             ->withStatus(200);
     }
 
+    public function details(Request $request, Response $response, array $args): Response
+    {
+        $productId = $args['id'];
+
+        $product = $this->products_model->getProductById($productId);
+
+        $data = [
+            "product" => $product,
+            "categories" => $this->categories_model->getCategoryById($productId),
+            "images" => $this->products_model->getProductImage($productId)
+        ];
+
+        return $this->render($response, 'products/userProductDetailsView.php', $data);
+    }
+
     public function userIndex(Request $request, Response $response, array $args): Response
     {
         // TODO: Get all products using $this->model->getAllProducts()

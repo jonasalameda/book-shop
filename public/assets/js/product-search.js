@@ -1,3 +1,31 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    // const categoryFilter = document.getElementById("categoryFilter");
+    const loadingSpinner = document.getElementById("loadingSpinner");
+
+    async function performSearch() {
+        const searchTerm = searchInput.value.trim();
+        // const categoryId = categoryFilter.value;
+
+        loadingSpinner.style.display = "block";
+        const products = await fetchProducts(searchTerm);
+        loadingSpinner.style.display = "none";
+
+        renderProducts(products);
+    }
+
+    const debouncedSearch = debounce(performSearch, 300);
+
+    searchInput.addEventListener("input", debouncedSearch);
+
+    searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            searchInput.value = "";
+            performSearch();
+        }
+    });
+});
+
 function debounce(func, delay) {
     let timeoutId;
     return function (...args) {

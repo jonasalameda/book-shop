@@ -14,15 +14,22 @@ function randomGIF()
 {
     $gifs = [
         "https://tenor.com/view/don-quixote-meme-limbus-company-project-moon-yapping-gif-9568944924184521933",
-        "https://tenor.com/view/don-quixote-don-limbus-company-limbus-dokibird-gif-4370949539332628256",
         "https://tenor.com/view/go-my-scarab-lobotomy-corporation-library-of-ruina-punishing-bird-apocalypse-bird-gif-6864640319894577960",
         "https://tenor.com/view/roland-lolang-library-of-ruina-lor-gif-3404051265727826411",
         "https://tenor.com/view/limbus-company-don-quixote-gif-6513598745099926539",
-        "https://tenor.com/view/don-quixote-limbus-limbus-company-don-sancho-gif-11002003181537778115",
         "https://tenor.com/view/dante-limbus-company-ltg-gif-1576163327419096720",
         "https://tenor.com/view/limbus-limbus-company-don-quixote-gif-27606974",
         "https://tenor.com/view/limbus-company-gif-501081621266469291",
-        "https://tenor.com/view/library-of-ruina-gif-26249605"
+        "https://tenor.com/view/library-of-ruina-gif-26249605",
+        "https://tenor.com/view/library-of-ruina-project-moon-gif-8164459208882938055",
+        "https://tenor.com/view/library-of-ruina-ruina-angela-lobotomy-lobotomy-corp-gif-6143762914515078628",
+        "https://tenor.com/view/yep-malkuth-library-of-ruina-ruina-gif-3569617196467316378",
+        "https://tenor.com/view/library-of-ruina-furioso-roland-gif-1316331211555882324",
+        "https://tenor.com/view/punishing-bird-limbus-company-bird-spin-punishing-library-of-ruina-gif-13798937787487446287",
+        "https://tenor.com/view/trunk-monkey-roland-library-of-ruina-project-moon-angela-gif-12409657993417070856",
+        "https://tenor.com/view/punishing-bird-breach-lobotomy-corporation-lob-corp-lobcorp-gif-18378812510204255330",
+        "https://tenor.com/view/library-of-ruina-roland-furioso-gif-21332362",
+        "https://tenor.com/view/red-mist-library-of-ruina-meme-gebura-great-split-gif-10069995606081450583"
     ];
 
     $gif = $gifs[random_int(0, sizeof($gifs))];
@@ -45,7 +52,7 @@ function randomGIF()
     </a>
 
     <div class="row justify-content-center text-center mt-3">
-        <div class="tenor-gif-embed" data-postid="<?= randomGIF() ?>" data-share-method="host" data-aspect-ratio="1" data-width="20%"></div>
+        <div class="tenor-gif-embed" data-postid="<?= randomGIF() ?>" data-share-method="host" data-aspect-ratio="1" data-width="30%" style="background-color=#212529"></div>
         <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     </div>
 </div>
