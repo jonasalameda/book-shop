@@ -42,7 +42,7 @@ Once enabled:
 Provides instant feedback to users and admins (success, error, warnings).
 Used for login errors, reservation confirmations, CRUD actions, and more.
 
-### Shopping Cart for Book Reservations
+### Book Reservations
 Users can add books to a cart before confirming their reservation.
 The cart persists through the session and allows:
 - Adding/removing books
@@ -57,8 +57,8 @@ The cart persists through the session and allows:
 - MySQL database
 
 ### Frontend
-- HTML5, CSS3, JavaScript
-- Bootstrap 5
+- HTML5, CSS, JavaScript
+- Bootstrap
 - Responsive UI components
 
 ### Other
