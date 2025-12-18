@@ -43,7 +43,7 @@ ViewHelper::adminHeader('Admin Dashboard') ?>
     <hr>
 
     <div class="actions">
-        <form method="POST" action="<?= '/' . APP_ROOT_DIR_NAME . '/logout' ?>">
+        <form method="GET" action="<?= APP_BASE_URL ?>/logout">
             <button type="submit" class="btn btn-secondary">Logout</button>
         </form>
     </div>
