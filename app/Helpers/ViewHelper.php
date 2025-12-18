@@ -45,7 +45,7 @@ class ViewHelper
         require_once APP_VIEWS_PATH . '/common/footer.php';
     }
 
-        public static function adminFooter(): void
+    public static function adminFooter(): void
     {
         require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
     }

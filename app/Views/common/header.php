@@ -18,29 +18,29 @@
             <a class="navbar-brand" href="/book-shop/">
                 <img src="/book-shop/public/assets/imgs/tail.png" alt="Logo" class="d-inline-block align-text-top" width="35" height="35">
             </a>
+            <a class="nav-link" href="<?= APP_BASE_URL ?>/products"><?= trans('nav.catalog'); ?></a>
             <a class="nav-link" href="/book-shop/featured"><?= trans('nav.featured'); ?></a>
-            <a class="nav-link" href="/book-shop/catalog"><?= trans('nav.catalog'); ?></a>
             <a class="nav-link" href="/book-shop/contact"><?= trans('nav.contact_us'); ?></a>
             <a class="nav-link sign-in" href="<?= APP_BASE_URL ?>/register"><?= trans('nav.sign_in'); ?></a>
             <div class="language-switcher">
-    <?php
-    // Get current locale from global translator
-    global $translator;
-    $currentLocale = $translator->getLocale();
-    $availableLocales = $translator->getAvailableLocales();
-    ?>
+                <?php
+                // Get current locale from global translator
+                global $translator;
+                $currentLocale = $translator->getLocale();
+                $availableLocales = $translator->getAvailableLocales();
+                ?>
 
-    <?php foreach ($availableLocales as $locale): ?>
-        <?php if ($locale !== $currentLocale): ?>
-            <a href="?lang=<?= hs($locale) ?>" class="lang-link">
-                <?= $locale === 'en' ? 'English' : 'Français' ?>
-            </a>
-        <?php endif; ?>
-    <?php endforeach; ?>
+                <?php foreach ($availableLocales as $locale): ?>
+                    <?php if ($locale !== $currentLocale): ?>
+                        <a href="?lang=<?= hs($locale) ?>" class="lang-link">
+                            <?= $locale === 'en' ? 'English' : 'Français' ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
-    <span class="current-lang">
-        <?= $currentLocale === 'en' ? '🇬🇧 English' : '🇫🇷 Français' ?>
-    </span>
-</div>
+                <span class="current-lang">
+                    <?= $currentLocale === 'en' ? '🇬🇧 English' : '🇫🇷 Français' ?>
+                </span>
+            </div>
         </div>
     </nav>

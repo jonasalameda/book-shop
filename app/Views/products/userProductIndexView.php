@@ -33,7 +33,7 @@ ViewHelper::loadHeader($page_title);
             <select class="form-select" id="categoryFilter" aria-label="Filter by category">
                 <option value="">All Categories</option>
                 <?php foreach ($categories as $category): ?>
-                    <option value="<?= hs($category['id']) ?>">
+                    <option value="<?= $category['id'] ?>">
                         <?= hs($category['name']) ?>
                     </option>
                 <?php endforeach; ?>
@@ -69,7 +69,7 @@ ViewHelper::loadHeader($page_title);
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer">
-                        <a href="/products/<?= hs($product['id']) ?>" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="/products/<?= $product['id'] ?>" class="btn btn-primary btn-sm">View Details</a>
                     </div>
                 </div>
             </div>
@@ -84,6 +84,10 @@ ViewHelper::loadHeader($page_title);
 </script>
 
 <!-- Load JavaScript for live search -->
-<script src="<?= APP_BASE_URL ?>/public/js/product-search.js"></script>
 
-<?php ViewHelper::loadFooter(); ?>
+
+<?php
+ViewHelper::loadJsScripts();
+ViewHelper::loadFooter();
+
+?>

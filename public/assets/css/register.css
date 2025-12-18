@@ -10,6 +10,7 @@ body {
     );
     background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fjrpgfr.net%2Fwp-content%2Fuploads%2F2024%2F04%2F60-%25E3%2580%258ELibrary-Of-Ruina%25E3%2580%258FPS4_Switch-Promotion-Trailer-YouTube-0-18.jpeg&f=1&nofb=1&ipt=65a551f3dc467b2e7d01256ad664776b93ae4b42b5cc9abe6261032363b03ee7");
     background-repeat: round;
+    height: 60em;
 }
 
 register-card {
@@ -40,15 +41,17 @@ p {
 }
 
 .register-header {
-    background-image: url("/book-shop/public/assets/imgs/Manual_Contents_Frame.png");
+    /* background-image: url("/book-shop/public/assets/imgs/Manual_Contents_Frame.png");
     background-size: cover;
     background-repeat: space;
+    background-size: 120% 105%; */
+    border: 1px solid rgba(230, 192, 146, 0.87);
 }
 
 .register-body {
     /* background-color: ; */
     background-image: url("/book-shop/public/assets/imgs/Manual_Contents_Frame.png");
-    background-size: 100% 110%;
+    background-size: 105% 105%;
     background-repeat: no-repeat;
     background-position: bottom;
 }

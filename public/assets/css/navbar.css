@@ -10,6 +10,7 @@ a.navbar-brand {
     font-family: "NanumSquare", Courier, monospace;
     position: sticky;
     width: 100%;
+    z-index: 1;
 }
 
 .nav-link {
