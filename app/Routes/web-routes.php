@@ -12,6 +12,7 @@ use App\Controllers\HomeController;
 use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
 use App\Controllers\CustomersController;
+use App\Controllers\AdminProfileController;
 use App\Controllers\UploadController;
 use App\Controllers\AuthController;
 use App\Controllers\TwoFactorController;
@@ -58,6 +59,11 @@ return static function (Slim\App $app): void {
 
         $group->get('/customer/delete/{id}', [CustomersController::class, 'delete']);
 
+        $group->get('/adminEdit/{id}', [AdminProfileController::class, 'edit'])
+            ->setName('admin.edit');
+
+        $group->post('/update/{id}', [AdminProfileController::class, 'update'])
+            ->setName('admin.update');
 
         // File upload routes
         // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');
