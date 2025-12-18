@@ -62,6 +62,13 @@
         "update_btn": "Mettre à jour le profil",
         "logout_btn": "Se déconnecter"
     },
+    "contact": {
+        "contact-us": "Contactez Nous",
+        "message-us": "Ecrivez nous!",
+        "send-message": "N'hésitez pas à nous envoyer un message si vous avez des questions ou rencontrez des problèmes avec vos commandes. Nous vous répondrons dans les plus brefs délais.",
+        "text-box": "Écrivez ici...",
+        "send": "Envoyer"
+    },
     "errors": {
         "404": {
             "title": "404 - Page introuvable",

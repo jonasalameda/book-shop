@@ -62,6 +62,13 @@
         "update_btn": "Update Profile",
         "logout_btn": "Logout"
     },
+    "contact": {
+        "contact-us": "Contact Us",
+        "message-us": "Message us!",
+        "send-message": "Send us an message for any doubt or problems you have with your orders. We will reach back to you as soon as possible.",
+        "text-box": "Write here...",
+        "send": "Send"
+    },
     "errors": {
         "404": {
             "title": "404 - Page Not Found",

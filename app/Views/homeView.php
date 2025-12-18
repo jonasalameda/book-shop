@@ -21,7 +21,7 @@ ViewHelper::loadHeader($page_title);
 
     <div class="row mt-3">
         <div class="col">
-            <button class="btn-start"><?= trans('home.start_button') ?></button>
+            <a href="<?= APP_BASE_URL ?>/products"><button class="btn-start"><?= trans('home.start_button') ?></button></a>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@
             <div class="col-2">
                 <ul>
                     <li>
-                        <a class="footer-link" href="#"><b><?= trans('footer.contact_us') ?></b></a>
+                        <a class="footer-link" href="<?= APP_BASE_URL ?>/contact"><b><?= trans('footer.contact_us') ?></b></a>
                     </li>
 
                     <li>

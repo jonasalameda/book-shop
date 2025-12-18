@@ -20,7 +20,7 @@
             </a>
             <a class="nav-link" href="<?= APP_BASE_URL ?>/products"><?= trans('nav.catalog'); ?></a>
             <a class="nav-link" href="<?= APP_BASE_URL ?>/dashboard"><?= trans('nav.dashboard'); ?></a>
-            <a class="nav-link" href="/book-shop/contact"><?= trans('nav.contact_us'); ?></a>
+            <a class="nav-link" href="<?= APP_BASE_URL ?>/contact"><?= trans('nav.contact_us'); ?></a>
             <?php
 
             use App\Helpers\SessionManager;

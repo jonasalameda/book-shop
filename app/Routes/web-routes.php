@@ -9,6 +9,7 @@ declare(strict_types=1);
 use App\Controllers\CategoriesController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
+use App\Controllers\ContactController;
 use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
 use App\Controllers\CustomersController;
@@ -80,6 +81,12 @@ return static function (Slim\App $app): void {
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
+
+    $app->get('/contact', [ContactController::class, 'index'])
+        ->setName('contact.index');
+
+    $app->post('/contact', [ContactController::class, 'submit'])
+        ->setName('contact.submit');
 
     $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
 
