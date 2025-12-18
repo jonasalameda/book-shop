@@ -1,4 +1,4 @@
-# Book Shop
+# Library of Ruina Book-Shop
 Assignment 2 for eCommerce
 
 This is a web application that allows users to browse a catalog of books, reserve titles, and manage their account. All of this while providing administrators with a complete dashboard for managing the system. The project includes **role‑based access control**, **Two‑Factor Authentication (2FA)**, and a full **CRUD admin panel**.
