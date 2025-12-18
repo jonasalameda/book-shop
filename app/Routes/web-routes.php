@@ -11,6 +11,7 @@ use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ShopController;
 use App\Controllers\ProductsController;
+use App\Controllers\CustomersController;
 use App\Controllers\UploadController;
 use App\Controllers\AuthController;
 use App\Controllers\TwoFactorController;
@@ -46,6 +47,17 @@ return static function (Slim\App $app): void {
 
         //* handle save edited product info
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']);
+
+        /*customers CRUD admin*/
+        $group->get('/customers', [CustomersController::class, 'index'])
+            ->setName('customers.index');
+
+        $group->get('/customer/edit/{id}', CustomersController::class . ':edit');
+
+        $group->post('/customer/update/{id}', CustomersController::class . ':update');
+
+        $group->get('/customer/delete/{id}', [CustomersController::class, 'delete']);
+
 
         // File upload routes
         // $group->get('/products/create', [UploadController::class, 'index'])->setName('upload.index');

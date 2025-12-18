@@ -42,7 +42,7 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES
 (1, 'Adventure', 'Exciting Adventure books that take you on a trip to the unknown.', '2025-11-13 14:20:06'),
 (2, 'Novel', 'Long, fictional narrative work, typically written in prose and published as a book.', '2025-11-13 14:20:06'),
 (3, 'Horror', 'Genre of art and media that aims to disturb, frighten, or scare an audience by eliciting feelings of fear, dread, or intense aversion.', '2025-11-13 14:20:06'),
-(4, 'Autobiography', 'An account of someone\'s life written by that person', '2025-11-13 14:20:06'),
+(4, 'Autobiography', 'An account of someones life written by that person', '2025-11-13 14:20:06'),
 (5, 'Fiction', 'Creative, imaginary work, such as novels, short stories, or films, that is not based on facts.', '2025-11-13 14:20:06');
 
 -- --------------------------------------------------------
