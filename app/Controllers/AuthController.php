@@ -241,6 +241,7 @@ class AuthController extends BaseController
         SessionManager::set('user_id', $user['id']);
         SessionManager::set('user_email', $user['email']);
         SessionManager::set('user_name', $user['first_name'] . ' ' . $user['last_name']);
+        SessionManager::set('username', $user['username']);
         SessionManager::set('user_role', $user['role']);
         SessionManager::set('is_authenticated', true);
         SessionManager::set('requires_2fa', $has2FA);
@@ -296,8 +297,8 @@ class AuthController extends BaseController
         $has2FA = $twoFactorModel->isEnabled($userId);
 
 
-        // TODO: Render 'user/dashboard.php' view and pass $data
-        return $this->render($response, 'user/dashboard.php', [
+        // TODO: Render 'customer/dashboard.php' view and pass $data
+        return $this->render($response, 'customer/dashboard.php', [
             'title' => 'Dashboard',
             'has2FA' => $has2FA
         ]);

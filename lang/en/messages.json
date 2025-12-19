@@ -56,11 +56,28 @@
         "name": "Name:",
         "email": "Email:",
         "role": "Role:",
+        "username": "Username",
         "actions": "Quick Actions",
         "products_btn": "Browse Products",
         "orders_btn": "My Orders",
         "update_btn": "Update Profile",
         "logout_btn": "Logout"
+    },
+    "profile_edit": {
+        "details": "Edit User Details",
+        "fname": "First Name",
+        "lname": "Last Name",
+        "email": "Courriel",
+        "username": "Nom d'utilisateur",
+        "update_btn": "Mettre à jour les modifications",
+        "cancel_btn": "Annuler"
+    },
+    "products": {
+        "browse": "Browse our Books",
+        "search": "Search products by name or description",
+        "categories": "All Categories",
+        "details_btn": "View Details",
+        "loading": "Loading..."
     },
     "contact": {
         "contact-us": "Contact Us",
@@ -72,7 +89,8 @@
     "errors": {
         "404": {
             "title": "404 - Page Not Found",
-            "message": "Oops! The page you are looking for does not exist."
+            "message": "You may not find your book in this place.",
+            "home_btn": "Back to Home"
         }
     }
 }

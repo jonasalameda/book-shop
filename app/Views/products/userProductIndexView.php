@@ -10,7 +10,7 @@ ViewHelper::loadHeader($page_title);
 <div class="container my-4">
     <div class="row mb-4">
         <div class="col-md-12">
-            <h1>Browse our Books</h1>
+            <h1><?= hs(trans('products.browse')) ?></h1>
         </div>
     </div>
 
@@ -26,13 +26,13 @@ ViewHelper::loadHeader($page_title);
                         type="text"
                         class="form-control"
                         id="searchInput"
-                        placeholder="Search products by name or description..."
+                        placeholder="<?= hs(trans('products.search')) ?>"
                         aria-label="Search products">
                 </form>
             </div>
             <div class="col-md-1">
                 <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden"><?= hs(trans('products.loading')) ?></span>
                 </div>
             </div>
             <div id="searchResults" class="row">
@@ -41,7 +41,7 @@ ViewHelper::loadHeader($page_title);
         </div>
         <div class="col-md-3">
             <select class="form-select" id="categoryFilter" aria-label="Filter by category">
-                <option value="">All Categories</option>
+                <option value=""><?= hs(trans('products.categories')) ?></option>
                 <?php foreach ($categories as $category): ?>
                     <option value="<?= $category['id'] ?>">
                         <?= hs($category['name']) ?>
@@ -52,7 +52,7 @@ ViewHelper::loadHeader($page_title);
         <div class="col-md-1">
             <!-- Loading Spinner -->
             <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden"><?= hs(trans('products.loading')) ?></span>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@ ViewHelper::loadHeader($page_title);
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer">
-                        <a href="<?= APP_BASE_URL ?>/products/<?= $product['id'] ?>" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="<?= APP_BASE_URL ?>/products/<?= $product['id'] ?>" class="btn btn-primary btn-sm"><?= hs(trans('products.details_btn')) ?></a>
                     </div>
                 </div>
             </div>
