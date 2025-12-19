@@ -19,7 +19,7 @@ ViewHelper::adminHeader($page_title);
 
 <h1>Welcome to The Book shop Directory</h1>
 <br>
-<a href="<?= APP_ADMIN_URL ?>/product/create">Create</a>
+<a href="<?= APP_ADMIN_URL ?>/products/create">Create</a>
 <div><?= FlashMessage::render(); ?></div>
     <table class="table table-striped">
         <thead>

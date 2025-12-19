@@ -29,7 +29,7 @@ $images = $data['images'];
             <div class="carousel-inner">
                 <?php foreach ($images as $image): ?>
                     <div class="carousel-item <?= $image['is_primary'] == 1 ? 'active' : '' ?>">
-                        <img height="400" width="400" src="<?= APP_UPLOADS_DIR_URL . $image['file_path'] ?>" class="d-block">
+                        <img height="400" width="100%" src="<?= APP_UPLOADS_DIR_URL . $image['file_path'] ?>" class="d-block">
                     </div>
                 <?php endforeach; ?>
             </div>

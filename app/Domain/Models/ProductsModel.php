@@ -36,15 +36,15 @@ class ProductsModel extends BaseModel
     public function updateProduct(int $id, array $productData)
     {
         return $this->execute(
-            'UPDATE users
+            'UPDATE products
          SET name = :name, description = :description, price = :price, stock_quantity = :stock_quantity, updated_at = :updated_at
          WHERE id = :id',
             [
                 'id' => $id,
-                'name' => $productData['name'],
+                'name' => $productData['product_name'],
                 'description' => $productData['description'],
                 'price' => $productData['price'],
-                'stock_quantity' => $productData['stock_quantity'],
+                'stock_quantity' => $productData['quantity'],
                 'updated_at' => date('Y-m-d H:i:s')
             ]
         );
@@ -121,5 +121,12 @@ class ProductsModel extends BaseModel
     public function getProductImage(int $productId)
     {
         return $this->selectAll("SELECT * FROM `product_images` WHERE product_id = ?", [$productId]);
+    }
+
+    public function updateProductImage(int $productId, $filename)
+    {
+        $sql = "UPDATE product_images SET file_path = ?";
+
+        return $this->execute($sql, [$filename]);
     }
 }

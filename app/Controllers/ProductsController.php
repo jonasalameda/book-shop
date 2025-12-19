@@ -106,7 +106,8 @@ class ProductsController extends BaseController
         $data = [
             'page_title' => 'Edit Product Details',
             'product' => $product,
-            'categories' => $categories
+            'categories' => $categories,
+            'image' => $this->products_model->getProductImage($product_id)
         ];
 
         return $this->render($response, 'admin/products/productsEditView.php', $data);
@@ -117,9 +118,14 @@ class ProductsController extends BaseController
         //? Save the edited product info.
         //* 1) Get the received form data from the request
         $product_info = $request->getParsedBody();
-        // dd($product_info);
         //TODO: Add a flash message to be shown to the user in master list (products list)
         //* 2) Ask the model to save the product info
+        // dd($product_info);
+        $this->products_model->updateProduct($product_info['product_id'], $product_info);
+        if (!empty($product_info['product_image'])) {
+            $this->products_model->updateProductImage($product_info['product_id'], $product_info['product_image']);
+        }
+
         FlashMessage::success('Update Successful');
         return $this->redirect($request, $response, 'products.index');
     }

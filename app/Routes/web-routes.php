@@ -43,6 +43,9 @@ return static function (Slim\App $app): void {
         $group->get('/categories', [CategoriesController::class, 'index'])
             ->setName('categories.index');
 
+        $group->get('/categories/create', [CategoriesController::class, 'create'])
+            ->setName('categories.create');
+
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
             ->setName('categories.index');
 
@@ -102,8 +105,8 @@ return static function (Slim\App $app): void {
         // ->add(TwoFactorMiddleware::class)  // Add this line
         ->add(AuthMiddleware::class);
 
-   $app->get('/customer/edit/{user_id}', [CustomersController::class, 'editProfile'])
-    ->setName('customer.edit');
+    $app->get('/customer/edit/{user_id}', [CustomersController::class, 'editProfile'])
+        ->setName('customer.edit');
 
     $app->post('/customer/update/{user_id}', [CustomersController::class, 'update'])
         ->setName('customer.update');
