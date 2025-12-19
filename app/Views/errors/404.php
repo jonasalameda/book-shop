@@ -2,7 +2,6 @@
 
 use App\Helpers\ViewHelper;
 
-use function DI\string;
 
 $page_title = '404 - Page Not Found';
 ViewHelper::loadHeader($page_title);
@@ -42,13 +41,13 @@ function randomGIF()
 
 <div style="text-align: center; padding: 50px 20px;">
     <h1 style="font-size: 72px; margin: 0; color: #e74c3c;">404</h1>
-    <h2 style="margin: 20px 0;">Page Not Found</h2>
+    <h2 style="margin: 20px 0;"><?= hs(trans('errors.404.title')) ?></h2>
     <p style="font-size: 18px; color: #dcdcdcff; margin: 20px 0;">
-        You may not find your book in this place.
+        <?= hs(trans('errors.404.message')) ?>
     </p>
 
     <a href="<?= APP_BASE_URL ?>" style="display: inline-block; margin-top: 30px; padding: 12px 30px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">
-        Back to home
+        <?= hs(trans('errors.404.home_btn')) ?>
     </a>
 
     <div class="row justify-content-center text-center mt-3">

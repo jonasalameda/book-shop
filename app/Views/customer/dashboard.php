@@ -29,7 +29,7 @@ ViewHelper::loadHeader($data['title']);
                             <strong><?= trans('dashboard.name') ?></strong> <?= htmlspecialchars($_SESSION['user_name'] ?? 'N/A') ?><br>
                             <strong><?= trans('dashboard.email') ?></strong> <?= htmlspecialchars($_SESSION['user_email'] ?? 'N/A') ?><br>
                             <strong><?= trans('dashboard.role') ?></strong> <?= htmlspecialchars($_SESSION['user_role'] ?? 'N/A') ?>/client<br>
-                            <strong>Username:</strong> <?= htmlspecialchars($_SESSION['username'] ?? 'N/A') ?>
+                            <strong><?= trans('dashboard.username') ?></strong> <?= htmlspecialchars($_SESSION['username'] ?? 'N/A') ?>
 
                         </p>
                     </div>
