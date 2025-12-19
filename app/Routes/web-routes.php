@@ -40,7 +40,6 @@ return static function (Slim\App $app): void {
 
         $group->get('/products/create', [ProductsController::class, 'create']);
 
-        //! Add Categories here
         $group->get('/categories', [CategoriesController::class, 'index'])
             ->setName('categories.index');
 
@@ -54,9 +53,9 @@ return static function (Slim\App $app): void {
         $group->get('/customers', [CustomersController::class, 'index'])
             ->setName('customers.index');
 
-        $group->get('/customer/edit/{id}', CustomersController::class . ':edit');
+        $group->get('/customer/edit/{id}', [CustomersController::class, 'editCustomers']);
 
-        $group->post('/customer/update/{id}', CustomersController::class . ':update');
+        $group->post('/customer/update/{id}', [CustomersController::class, 'updateCustomers']);
 
         $group->get('/customer/delete/{id}', [CustomersController::class, 'delete']);
 
@@ -98,10 +97,18 @@ return static function (Slim\App $app): void {
 
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
-$app->get('/dashboard', [AuthController::class, 'dashboard'])
+    $app->get('/dashboard', [AuthController::class, 'dashboard'])
     ->setName('user.dashboard')
     // ->add(TwoFactorMiddleware::class)  // Add this line
     ->add(AuthMiddleware::class);
+
+   $app->get('/customer/edit/{user_id}', [CustomersController::class, 'editProfile'])
+    ->setName('customer.edit');
+
+    $app->post('/customer/update/{user_id}', [CustomersController::class, 'update'])
+        ->setName('customer.update');
+
+
 
     $app->get('/products', [ProductsController::class, 'userIndex']);
 

@@ -36,21 +36,67 @@ class CustomersController extends BaseController
         $customer = $this->customer_model->getOneCustomer($userID);
         // dd($user); //Works
         $data = [
-            'customer' => $customer
+            'user' => $customer
         ];
         return $this->render($response, 'admin/customers/customersEditView.php', $data);
     }
 
+    public function editCustomers(Request $request, Response $response, array $args): Response
+    {
+        $userID = $args["id"];
+        $customer = $this->customer_model->getOneCustomer($userID);
+
+        return $this->render($response, 'admin/customers/customersEditView.php', [
+            'customer' => $customer
+        ]);
+    }
+
+
+    public function editProfile(Request $request, Response $response, array $args): Response
+    {
+
+        $userID = $args["user_id"] ?? null;
+        // dd($userID);
+        $customer = $this->customer_model->getOneCustomer($userID);
+        // dd($user); //Works
+        $data = [
+            'user' => $customer
+        ];
+        return $this->render($response, 'customer/editProfile.php', $data);
+    }
+
     /**
-     * Delete user
+     * update user
      */
     public function update(Request $request, Response $response, array $args): Response
     {
         $userInfo = $request->getParsedBody();
         // dd($userInfo); //is good
-        $user_id = $userInfo["id"];
-        $this->customer_model->updateCustomer($user_id, $userInfo);
+        $user_id = $userInfo["user_id"];
+
+        $this->customer_model->updateCustomerProfile($user_id, $userInfo);
+
+        $updatedUser = $this->customer_model->getOneCustomer($user_id);
+
+        SessionManager::set('user_name', $updatedUser['first_name'] . ' ' . $updatedUser['last_name']);
+        SessionManager::set('user_email', $updatedUser['email']);
+        SessionManager::set('user_id', $updatedUser['id']);
+        SessionManager::set('username', $updatedUser['username']);
+
         FlashMessage::success('Customer information updated successfully!');
+
+        return $this->redirect($request, $response, 'user.dashboard');
+    }
+
+    public function updateCustomers(Request $request, Response $response, array $args): Response
+    {
+        $userID = $args["id"];
+        $userInfo = $request->getParsedBody();
+
+        $this->customer_model->updateCustomer($userID, $userInfo);
+
+        FlashMessage::success('Customer updated successfully.');
+
         return $this->redirect($request, $response, 'customers.index');
     }
 

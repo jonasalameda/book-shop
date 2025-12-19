@@ -49,6 +49,26 @@ class CustomerModel extends BaseModel
         return $updateUser;
     }
 
+    public function updateCustomerProfile(int $id, array $userInfo)
+    {
+        $sql = "UPDATE users SET first_name = :first_name,
+                    last_name = :last_name,
+                    email = :email,
+                    username = :username,
+                    updated_at = NOW() WHERE id = :id";
+
+        $updateUser = $this->execute($sql, [
+            'id' => $id,
+            'first_name' => $userInfo['user_fname'],
+            'last_name' => $userInfo['user_lname'],
+            'email' => $userInfo['user_email'],
+            'username' => $userInfo['user_username']
+        ]);
+
+        return $updateUser;
+    }
+
+
     public function deleteCustomer($id)
     {
         $query = "DELETE FROM users WHERE id = :customer_id AND role = 'customer'";
