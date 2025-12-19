@@ -8,8 +8,9 @@ declare(strict_types=1);
 define('APP_DEBUG_MODE', true);
 define('APP_ASSETS_DIR', '/public/assets');
 define('APP_BASE_URL', 'http://localhost/' . APP_ROOT_DIR_NAME);
+define('APP_UPLOADS_DIR_URL', APP_BASE_URL . "/public/uploads/products/");
 
-define('APP_UPLOAD_DIR', APP_BASE_DIR_PATH . '/uploads');
+define('APP_UPLOAD_DIR', APP_BASE_DIR_PATH . '/public/uploads');
 
 //* The base URI for the admin panel
 define('APP_ADMIN_URL', APP_BASE_URL . '/admin');

@@ -60,6 +60,7 @@ class FileUploadHelper
 
         $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
 
+        // store this in the db instead of the path
         $filename = uniqid($filenamePrefix) . '.' . $extension;
 
         if (!is_dir($directory)) {
@@ -68,7 +69,7 @@ class FileUploadHelper
             }
         }
 
-        $destination = $directory . DIRECTORY_SEPARATOR . $filename;
+        $destination = APP_UPLOAD_DIR . DIRECTORY_SEPARATOR . $filename;
 
         try {
             $uploadedFile->moveTo($destination);
@@ -76,6 +77,6 @@ class FileUploadHelper
             return Result::failure('Failed to save uploaded file: ' . $e->getMessage());
         }
 
-        return Result::success('File uploaded successfully', ['filename' => $filename, 'filepath' => $destination]);
+        return Result::success('File uploaded successfully', ['filename' => $filename]);
     }
 }

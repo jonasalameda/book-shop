@@ -73,7 +73,7 @@ class ProductsController extends BaseController
         // ? DEFAULT: 'upload_'
         $this->products_model->createProductImage([
             "prod_id" => $productId,
-            "file_path" => $imageData['filepath'],
+            "file_path" => $imageData['filename'],
             "is_primary" => true,
         ]);
 
@@ -188,7 +188,6 @@ class ProductsController extends BaseController
             "categories" => $this->categories_model->getCategoryById($productId),
             "images" => $this->products_model->getProductImage($productId)
         ];
-
         return $this->render($response, 'products/userProductDetailsView.php', $data);
     }
 
@@ -196,6 +195,7 @@ class ProductsController extends BaseController
     {
         // TODO: Get all products using $this->model->getAllProducts()
         $products = $this->products_model->getProducts();
+        // dd($products);
         // TODO: Get all categories using $this->model->getAllCategories()
         $categories = $this->categories_model->getAll();
         // TODO: Render the view 'products/userProductIndexView.php'

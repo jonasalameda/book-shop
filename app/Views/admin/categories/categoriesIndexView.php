@@ -17,6 +17,7 @@ ViewHelper::adminHeader($page_title);
 
         <h1>Welcome to The Book Shop Directory</h1>
         <br>
+        <a href="<?= APP_ADMIN_URL ?>/categories/create">Create</a>
         <table class="table table-striped">
             <thead>
                 <tr>

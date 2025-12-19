@@ -21,7 +21,7 @@ $images = $data['images'];
 
 <!-- Search Container -->
 
-<div class="book-details" style="height: 45em;">
+<div class="book-details" style="height: 50em;">
     <div class="book-image">
 
 
@@ -29,7 +29,7 @@ $images = $data['images'];
             <div class="carousel-inner">
                 <?php foreach ($images as $image): ?>
                     <div class="carousel-item <?= $image['is_primary'] == 1 ? 'active' : '' ?>">
-                        <img src="<?= $image['file_path'] ?>" class="w-100 h-100" alt="">
+                        <img height="400" width="400" src="<?= APP_UPLOADS_DIR_URL . $image['file_path'] ?>" class="d-block">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -58,7 +58,7 @@ $images = $data['images'];
     <div class="book-actions">
         <div class="card">
             <div class="card-body">
-                <form action="">
+                <form action="" method="post">
                     <button class="btn btn-primary" type="submit">
                         Add to cart
                     </button>

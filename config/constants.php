@@ -14,7 +14,6 @@ define('APP_VIEWS_PATH', realpath(APP_BASE_DIR_PATH . '/app/Views'));
 // Define the path of the application's localization files
 define('APP_LANG_PATH', realpath(APP_BASE_DIR_PATH . '/lang'));
 
-
 //* HTTP response status code.
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;

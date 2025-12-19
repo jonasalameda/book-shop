@@ -19,8 +19,8 @@ class ProductsModel extends BaseModel
      */
     public function getProducts(): mixed
     {
-
-        $sql = "SELECT * FROM {$this->products_table} ORDER BY id ASC";
+        // TODO: change query
+        $sql = "SELECT p.*, pi.file_path FROM {$this->products_table} p LEFT JOIN `product_images` pi ON p.id = pi.product_id GROUP BY p.id";
         $products = $this->selectAll($sql);
         return $products;
     }

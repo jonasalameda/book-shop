@@ -1,4 +1,8 @@
-<?php require __DIR__ . '/../common/header.php'; ?>
+<?php
+$page_title = "2FA Verification";
+require __DIR__ . '/../common/header.php';
+
+?>
 
 <div class="container" style="max-width: 400px; margin: 100px auto;">
     <h1>Two-Factor Verification</h1>
@@ -12,14 +16,14 @@
         <div class="form-group">
             <label for="code">Verification Code:</label>
             <input type="text"
-                   id="code"
-                   name="code"
-                   pattern="[0-9]{6}"
-                   maxlength="6"
-                   required
-                   autofocus
-                   placeholder="000000"
-                   style="font-size: 2em; letter-spacing: 10px; text-align: center;">
+                id="code"
+                name="code"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                required
+                autofocus
+                placeholder="000000"
+                style="font-size: 2em; letter-spacing: 10px; text-align: center;">
         </div>
 
         <!-- TODO: Add trust device checkbox (Part 3) -->
@@ -41,13 +45,48 @@
 </div>
 
 <style>
-    .form-group { margin: 20px 0; }
-    .form-group label { display: block; margin-bottom: 5px; }
-    .form-group input[type="text"] { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; }
-    .btn { padding: 15px 20px; border: none; border-radius: 4px; cursor: pointer; }
-    .btn-primary { background: #007bff; color: white; }
-    .btn-link { background: none; border: none; color: #007bff; cursor: pointer; text-decoration: underline; }
-    .alert-danger { background: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; }
+    .form-group {
+        margin: 20px 0;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .btn {
+        padding: 15px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: white;
+    }
+
+    .btn-link {
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 4px;
+    }
 </style>
 
 <?php require __DIR__ . '/../common/footer.php'; ?>

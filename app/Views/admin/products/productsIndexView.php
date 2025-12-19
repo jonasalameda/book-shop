@@ -12,13 +12,14 @@ ViewHelper::adminHeader($page_title);
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
-        
+
     </div>
     <div class="table-responsive small">
 <!--TODO: render the list of products/categories using an HTML table -->
 
 <h1>Welcome to The Book shop Directory</h1>
 <br>
+<a href="<?= APP_ADMIN_URL ?>/product/create">Create</a>
 <div><?= FlashMessage::render(); ?></div>
     <table class="table table-striped">
         <thead>
