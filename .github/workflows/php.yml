@@ -17,6 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Update dependencies
+      run: composer update
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -28,9 +31,6 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-
-    - name: Update dependencies
-      run: composer update
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
